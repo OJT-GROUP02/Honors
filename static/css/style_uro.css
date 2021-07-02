@@ -141,6 +141,7 @@ tr{
 td {
 	border: 1px solid black;
 	text-align: center;
+	font: 15px Helvetica, Sans-Serif;
 }
 
 .gender{
