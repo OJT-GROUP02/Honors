@@ -51,22 +51,19 @@ Legazpi City"></textarea>
 		<table id="students">
 
 			<tr>
-				<th>No.</th>
-				<th>Name</th>
+				<th rowspan="2">No.</th>
+				<th rowspan="2">Name</th>
                 <th colspan="2">Classification</th>
 				<th colspan="3">Rating</th>
-				<th>Award</th>
+				<th rowspan="2">Award</th>
 			</tr>
 			
 			<tr>
-				<th></th>
-				<th></th>
                 <th>Regular</th>
                 <th>Irregular</th>
 				<th>Sum of Grades</th>
 				<th>Total Units</th>
 				<th>Final GWA</th>
-				<th></th>
 			</tr>
             {{count = 1}}
             {{for student in students_honor: }}
@@ -123,26 +120,25 @@ Legazpi City"></textarea>
 			
 			<div class="col">
                 <h6><b>EVALUATION COMMITTEE:</b></h6>
-				<h6 class="member-name"><b>CHRISTINA U. BALLESTEROS</b></h6>
+				<h6 class="member-name" style="margin-top: 7%;"><b>CHRISTINA U. BALLESTEROS</b></h6>
 				<h6 class="member-position">Faculty In-Charge for Guidance Services, Member</h6>
                 <br>
-                <h6 class="member-name"><b>MARK FRANCIS G. NG</b></h6>
+                <h6 class="member-name" style="margin-top: 5%;"><b>MARK FRANCIS G. NG</b></h6>
                 <h6 class="member-position">Department Chair, Vice - Chariperson</h6>
 			</div>
 
 			<div class="col">
-                <h6 style="text-align:right">asdasd</h6>
-				<h6 class="member-name" style="text-align:right"><b>EDNA B. MATA, M.Econ.</b></h6>
-				<h6 class="member-position" style="text-align:right">Coordinator of Student Services</h6>
+				<h6 class="member-name" style="text-align:center; margin-top: 10%;"><b>EDNA B. MATA, M.Econ.</b></h6>
+				<h6 class="member-position" style="text-align:center">Coordinator of Student Services</h6>
                 <br>
-                <h6 class="member-name" style="text-align:right"><b>SALVADOR M. ABIÑA</b></h6>
-                <h6 class="member-position" style="text-align:right">Registrar II, Chariperson</h6>
+                <h6 class="member-name" style="text-align:center; margin-top: 5%;"><b>SALVADOR M. ABIÑA</b></h6>
+                <h6 class="member-position" style="text-align:center">Registrar II, Chariperson</h6>
 			</div>
         </div>
         <div class="row">
             <div class="col">
                 <h6 style="text-align:center">Noted:</h6>
-                <h6 class="member-name" style="text-align:center"><b>EDDIE S. SEE, Ed.D.</b></h6>
+                <h6 class="member-name" style="text-align:center; margin-top: 5%;"><b>EDDIE S. SEE, Ed.D.</b></h6>
                 <h6 class="member-position" style="text-align:center">Dean</h6>
             </div>
         </div>
@@ -190,30 +186,27 @@ Legazpi City"></textarea>
 			<h6 class="member-position">Co Chairperson</h6>
 		</div>
 
-	</div>
+	
 
     <!-- For Other Students -->
 	
 	<table id="students">
 
 		<tr>
-			<th>No.</th>
-			<th>Name</th>
-			<th colspan="2">Classification</th>
-			<th colspan="3">Rating</th>
-			<th>Award</th>
-		</tr>
-		
-		<tr>
-			<th></th>
-			<th></th> 
-			<th>Regular</th>
-			<th>Irregular</th>
-			<th>Sum of Grades</th>
-			<th>Total Units</th>
-			<th>Final GWA</th>
-			<th></th>
-		</tr>
+            <th rowspan="2">No.</th>
+            <th rowspan="2">Name</th>
+            <th colspan="2">Classification</th>
+            <th colspan="3">Rating</th>
+            <th rowspan="2">Award</th>
+        </tr>
+        
+        <tr>
+            <th>Regular</th>
+            <th>Irregular</th>
+            <th>Sum of Grades</th>
+            <th>Total Units</th>
+            <th>Final GWA</th>
+        </tr>
 		
 		{{for student in all_students: }}
 			{{if student.awards.award_title is None:}}
@@ -247,6 +240,6 @@ Legazpi City"></textarea>
 			{{pass}}
 		{{pass}} 
 	</table>
-        
+    </div>    
 </body>
 </html>
