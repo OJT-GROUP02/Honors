@@ -284,25 +284,11 @@ textarea:hover, textarea:focus, #students td.total-value textarea:hover, #studen
 	position: relative;
 }
 
-.delete {
-	display: block;
-	color: #000;
-	text-decoration: none;
-	position: absolute;
-	background: #EEEEEE;
-	font-weight: bold;
-	padding: 0px 3px;
-	border: 1px solid;
-	top: -6px;
-	left: -22px;
-	font-family: Verdana;
-	font-size: 12px;
-}
-
 @media print{
 	#page-wrap {
 		width: 100%;
 		margin: 0;
 		padding: 20px;
+		border: none;
 	}
 }
