@@ -1,0 +1,252 @@
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>RANK</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="{{=URL('static','css/bootstrap.min.css')}}" />
+	<link rel="stylesheet" href="{{=URL('static','css/style_uro.css')}}" />
+	<script src="{{=URL('static','js/jquery-1.3.2.min.js')}}"></script>
+</head>
+
+<body>
+	<div id="page-wrap">
+
+		<textarea id="header" placeholder="Republic of the Philippines
+        Bicol University
+        COLLEGE OF BUSINESS, ECONOMICS AND MANAGEMENT
+        <Enter Address>"></textarea>
+
+		<div class="date">
+			
+			<textarea id="date" placeholder="mm/dd/yy"></textarea></td>
+		
+		</div>
+
+		<div style="clear:both"></div>
+
+		<div id="inside-address">
+			
+			<textarea id="inside-address-content" placeholder="THE UNIVERSITY REGISTRAR
+Bicol University
+Legazpi City"></textarea>
+		
+		</div>
+
+		<div id="attention">
+			<textarea id="attention-content"
+			placeholder="Attn: UNIVERITY EVALUATION/REVIEW COMMITTEE ON HONOR AND GRADUATES"></textarea>
+		</div>
+
+		<div id="greetings">
+			<textarea id="greetings-txt" placeholder="<Sir/Madam:>"></textarea>
+		</div>
+
+		<div id="letter-body">
+			<textarea id="letter-body-content" 
+			placeholder="	Herewith are the Official List of Candidates for Graduation with Honors under the different degree programs of the <Insert College> for the <semester, academic year>."></textarea>
+		</div>
+
+		<!-- Table -->
+		<table id="students">
+
+			<tr>
+				<th>No.</th>
+				<th>Name</th>
+                <th colspan="2">Classification</th>
+				<th colspan="3">Rating</th>
+				<th>Award</th>
+			</tr>
+			
+			<tr>
+				<th></th>
+				<th></th>
+                <th>Regular</th>
+                <th>Irregular</th>
+				<th>Sum of Grades</th>
+				<th>Total Units</th>
+				<th>Final GWA</th>
+				<th></th>
+			</tr>
+            {{count = 1}}
+            {{for student in students_honor: }}
+           
+			<tr class="item-row">
+				<td class="student-no">{{=count}}.</td>
+               
+                <!-- For Regular Students  -->
+
+                {{if student.student.classification == 'Regular': }}
+
+                    <td class="student-name">{{=student.student.first_name + ' ' +\
+                    student.student.middle_name + ' ' + student.student.last_name}}</td>
+                    
+                    <td class="regular">✔</td>
+
+                    <td class="irregular"></td>
+
+                    <td class="total-units">{{=student.grade.total_units}}</td>
+
+                    <td class="grade-sum">{{=student.grade.sum_of_grades}}</td>
+
+                    <td class="final-gwa" style="color: #9d0008; background-color: #fbc3cb">{{=student.grade.final_gwa}}</td>
+                    
+                    <td class="award">{{=student.awards.award_title}}</td>
+                {{pass}}
+               
+                <!-- For Irregular Students -->
+
+                {{if student.student.classification == 'Irregular': }}
+
+                    <td class="student-name">{{=student.student.first_name + ' ' +\
+                    student.student.middle_name + ' ' + student.student.last_name}}</td>
+
+                    <td class="regular"></td>
+
+                    <td class="irregular">✔</td>
+
+                    <td class="total-units">{{=student.grade.total_units}}</td>
+
+                    <td class="grade-sum">{{=student.grade.sum_of_grades}}</td>
+
+                    <td class="final-gwa" style="color: #9d0008; background-color: #fbc3cb">{{=student.grade.final_gwa}}</td>
+                    
+                    <td class="award">{{=student.awards.award_title}}</td>
+                {{pass}}
+
+			</tr>
+            {{count += 1}}
+            {{pass}}
+		</table>
+
+        <div class="row">
+			
+			<div class="col">
+                <h6><b>EVALUATION COMMITTEE:</b></h6>
+				<h6 class="member-name"><b>CHRISTINA U. BALLESTEROS</b></h6>
+				<h6 class="member-position">Faculty In-Charge for Guidance Services, Member</h6>
+                <br>
+                <h6 class="member-name"><b>MARK FRANCIS G. NG</b></h6>
+                <h6 class="member-position">Department Chair, Vice - Chariperson</h6>
+			</div>
+
+			<div class="col">
+                <h6 style="text-align:right">asdasd</h6>
+				<h6 class="member-name" style="text-align:right"><b>EDNA B. MATA, M.Econ.</b></h6>
+				<h6 class="member-position" style="text-align:right">Coordinator of Student Services</h6>
+                <br>
+                <h6 class="member-name" style="text-align:right"><b>SALVADOR M. ABIÑA</b></h6>
+                <h6 class="member-position" style="text-align:right">Registrar II, Chariperson</h6>
+			</div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h6 style="text-align:center">Noted:</h6>
+                <h6 class="member-name" style="text-align:center"><b>EDDIE S. SEE, Ed.D.</b></h6>
+                <h6 class="member-position" style="text-align:center">Dean</h6>
+            </div>
+        </div>
+
+		<div id="note">
+			<p>Note: Subject for verification/recommendation/approval by the University Evaluation/Review Committee 
+			on Honor Graduates</p>
+			<p>Attached are the individual collegiate student's permanent record with the 
+			individual computation of grades and other important documents of the respective honor graduates for 
+			comments, recommendation and approval.</p>
+		</div>
+
+		<h5>COLLEGE/CAMPUS EVALUATION/REVIEW COMMITTEE</h5>
+
+		<div class="row">
+			
+			<div class="col">
+				<h6 class="member-name">Juan Dela Cruz</h6>
+				<h6 class="member-position">Member</h6>
+			</div>
+
+			<div class="col">
+				<h6 class="member-name">Juan Dela Cruz</h6>
+				<h6 class="member-position">Member</h6>
+			</div>
+
+			<div class="col">
+				<h6 class="member-name">Juan Dela Cruz</h6>
+				<h6 class="member-position">Member</h6>
+			</div>
+
+			<div class="col">
+				<h6 class="member-name">Juan Dela Cruz</h6>
+				<h6 class="member-position">Member</h6>
+			</div>
+		</div>
+
+		<div id="co-chair">
+			<h6 class="member-name">Juana Dela Cruz</h6>
+			<h6 class="member-position">Co Chairman</h6>
+		</div>
+		
+		<div id="chair">
+			<h6 class="member-name">Juana Dela Cruz</h6>
+			<h6 class="member-position">Co Chairperson</h6>
+		</div>
+
+	</div>
+
+    <!-- For Other Students -->
+	
+	<table id="students">
+
+		<tr>
+			<th>No.</th>
+			<th>Name</th>
+			<th colspan="2">Classification</th>
+			<th colspan="3">Rating</th>
+			<th>Award</th>
+		</tr>
+		
+		<tr>
+			<th></th>
+			<th></th> 
+			<th>Regular</th>
+			<th>Irregular</th>
+			<th>Sum of Grades</th>
+			<th>Total Units</th>
+			<th>Final GWA</th>
+			<th></th>
+		</tr>
+		
+		{{for student in all_students: }}
+			{{if student.awards.award_title is None:}}
+				{{if student.grade.total_units is not None and student.grade.total_units != 234: }}
+					<tr class="item-row" bgcolor="#f0e68c">
+				{{else:}}
+					<tr class="item-row">
+				{{pass}}
+					<td class="student-no">{{=count}}.</td>
+				
+					<td class="student-name">{{=student.student.first_name + ' ' +\
+					student.student.middle_name + ' ' + student.student.last_name}}</td>
+						
+					<td class="regular"></td>
+
+					<td class="irregular"></td>
+
+					<td class="total-units">{{=student.grade.total_units}}</td>
+
+					<td class="grade-sum">{{=student.grade.sum_of_grades}}</td>
+					
+				{{if student.grade.final_gwa is not None and student.grade.final_gwa <= 1.75: }}
+					<td class="final-gwa" style="color: #9d0008; background-color: #fbc3cb;">{{=student.grade.final_gwa}}</td>
+				{{else: }}
+					<td class="final-gwa">{{=student.grade.final_gwa}}</td>
+				{{pass}}
+
+					<td class="award">{{=student.awards.award_title}}</td>
+					{{count += 1}}
+				</tr>
+			{{pass}}
+		{{pass}} 
+	</table>
+        
+</body>
+</html>
