@@ -63,83 +63,118 @@ Legazpi City"></textarea>
             <th>Final GWA</th>
         </tr>
 
-    {{count = 1}}
+        <!--- male students --->
+        {{count = 1}}
+
         <tr>
             <th id="male-th" colspan="6">Male</th>
         </tr>
-    {{for m_student in male_students: }}
-        {{if m_student.grade.total_units is not None and m_student.grade.total_units < total_units: }}
-        <tr class="item-row" bgcolor="#f0e68c">
-        {{else:}}
-        <tr class="item-row">
-        {{pass}}
-            <td class="student-no">{{=count}}</td>
-            <td class="student-name">{{=m_student.student.first_name + ' ' + \
-            m_student.student.middle_name + ' ' + m_student.student.last_name}}</td>
-        {{if m_student.grade.sum_of_grades is None :
-        m_student.grade.sum_of_grades = ""
-        }}{{pass}}
-            <td class="grade-sum">{{=m_student.grade.sum_of_grades}}</td>
-        {{if m_student.grade.total_units is None :
-        m_student.grade.total_units = ""
-        }}{{pass}}
-            <td class="total-units">{{=m_student.grade.total_units}}</td>
 
-        {{if m_student.grade.final_gwa is not None and m_student.grade.final_gwa <= 1.75: }}
-            <td class="final-gwa" style="color: #9d0008; background-color: #fbc3cb;">{{=m_student.grade.final_gwa}}</td>
-        {{else: }}
-            {{if m_student.grade.final_gwa is None :
-                m_student.grade.final_gwa = ""
-            }}{{pass}}
-            <td class="final-gwa">{{=m_student.grade.final_gwa}}</td>
-        {{pass}}
-        {{if m_student.awards.award_title is None :
-        m_student.awards.award_title = ""
-        }}{{pass}}
-            <td class="award">{{=m_student.awards.award_title}}</td>
-        </tr>
-    {{count += 1}}
-    {{pass}}
-    {{count = 1}}
+            {{for m_student in male_students: }}
+
+                {{if m_student.grade.total_units is not None and m_student.grade.total_units < total_units: }}
+                    <tr class="item-row" bgcolor="#f0e68c">
+                {{else:}}
+                    <tr class="item-row">
+                {{pass}}
+
+                    <td class="student-no">{{=count}}</td>
+
+                    <td class="student-name">{{=m_student.student.first_name + ' ' + \
+                    m_student.student.middle_name + ' ' + m_student.student.last_name}}</td>
+
+                    {{if m_student.grade.sum_of_grades is None :
+                        m_student.grade.sum_of_grades = ""
+                    }}{{pass}}
+
+                    <td class="grade-sum">{{=m_student.grade.sum_of_grades}}</td>
+
+                    {{if m_student.grade.total_units is None :
+                        m_student.grade.total_units = ""
+                    }}{{pass}}
+
+                    <td class="total-units">{{=m_student.grade.total_units}}</td>
+
+                    {{if m_student.grade.final_gwa is not None and m_student.grade.final_gwa <= 1.75: }}
+                        <td class="final-gwa" style="color: #9d0008; background-color: #fbc3cb;">{{=m_student.grade.final_gwa}}</td>
+                    {{else: }}
+                        {{if m_student.grade.final_gwa is None :
+                            m_student.grade.final_gwa = ""
+                        }}{{pass}}
+
+                    <td class="final-gwa">{{=m_student.grade.final_gwa}}</td>
+
+                    {{pass}}
+
+                    {{if m_student.awards.award_title is None :
+                        m_student.awards.award_title = ""
+                    }}{{pass}}
+
+                    <td class="award">{{=m_student.awards.award_title}}</td>
+                </tr>
+
+                {{count += 1}}
+
+            {{pass}}
+
+        <!--- female students --->
+        {{count = 1}}
+
         <tr>
             <th colspan="6">Female</th>
 
         </tr>
-    {{for f_student in female_students: }}
-        {{if f_student.grade.total_units is not None and f_student.grade.total_units < total_units: }}
-        <tr class="item-row" bgcolor="#f0e68c">
-        {{else:}}
-        <tr class="item-row">
-        {{pass}}
-            <td class="student-no">{{=count}}</td>
-            <td class="student-name">{{=f_student.student.first_name + ' ' + \
-            f_student.student.middle_name + ' ' +f_student.student.last_name}}</td>
-        {{if f_student.grade.sum_of_grades is None :
-        f_student.grade.sum_of_grades = ""
-        }}{{pass}}
-            <td class="grade-sum">{{=f_student.grade.sum_of_grades}}</td>
-        {{if f_student.grade.total_units is None :
-        f_student.grade.total_units = ""
-        }}{{pass}}
-            <td class="total-units">{{=f_student.grade.total_units}}</td>
-        {{if f_student.grade.final_gwa is None :
-        f_student.grade.final_gwa = 0
-        }}{{pass}}
-        {{if f_student.grade.final_gwa is not None and f_student.grade.final_gwa <= 1.75:}}
-            <td class="final-gwa" style="color: #9d0008; background-color: #fbc3cb;">{{=f_student.grade.final_gwa}}</td>
-        {{else: }}
-            {{if f_student.grade.final_gwa is None :
-                f_student.grade.final_gwa = ""
-            }}{{pass}}
-            <td class="final-gwa">{{=f_student.grade.final_gwa}}</td>
-        {{pass}}
-        {{if f_student.awards.award_title is None :
-        f_student.awards.award_title = ""
-        }}{{pass}}
-            <td class="award">{{=f_student.awards.award_title}}</td>
-        </tr>
-    {{count += 1}}
-    {{pass}}
+        
+            {{for f_student in female_students: }}
+
+                {{if f_student.grade.total_units is not None and f_student.grade.total_units < total_units: }}
+                    <tr class="item-row" bgcolor="#f0e68c">
+                {{else:}}
+                    <tr class="item-row">
+                {{pass}}
+
+                    <td class="student-no">{{=count}}</td>
+
+                    <td class="student-name">{{=f_student.student.first_name + ' ' + \
+                    f_student.student.middle_name + ' ' +f_student.student.last_name}}</td>
+
+                    {{if f_student.grade.sum_of_grades is None :
+                        f_student.grade.sum_of_grades = ""
+                    }}{{pass}}
+
+                    <td class="grade-sum">{{=f_student.grade.sum_of_grades}}</td>
+
+                    {{if f_student.grade.total_units is None :
+                        f_student.grade.total_units = ""
+                    }}{{pass}}
+
+                    <td class="total-units">{{=f_student.grade.total_units}}</td>
+
+                    {{if f_student.grade.final_gwa is None :
+                        f_student.grade.final_gwa = 0
+                    }}{{pass}}
+
+                    {{if f_student.grade.final_gwa is not None and f_student.grade.final_gwa <= 1.75:}}
+                        <td class="final-gwa" style="color: #9d0008; background-color: #fbc3cb;">{{=f_student.grade.final_gwa}}</td>
+                    {{else: }}
+                        {{if f_student.grade.final_gwa is None :
+                            f_student.grade.final_gwa = ""
+                        }}{{pass}}
+
+                        <td class="final-gwa">{{=f_student.grade.final_gwa}}</td>
+
+                    {{pass}}
+
+                    {{if f_student.awards.award_title is None :
+                        f_student.awards.award_title = ""
+                    }}{{pass}}
+
+                    <td class="award">{{=f_student.awards.award_title}}</td>
+                </tr>
+
+                {{count += 1}}
+
+            {{pass}}
 
     </table>
 
