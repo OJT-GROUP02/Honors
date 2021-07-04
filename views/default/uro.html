@@ -19,7 +19,7 @@ Bicol University
 
     <div class="date">
 
-        <textarea id="date" placeholder="mm/dd/yy"></textarea></td>
+        <textarea id="date" placeholder="mm/dd/yy"></textarea>
 
     </div>
 
@@ -73,7 +73,7 @@ Legazpi City"></textarea>
             {{for m_student in male_students: }}
 
                 {{if m_student.grade.total_units is not None and m_student.grade.total_units < total_units: }}
-                    <tr class="item-row" bgcolor="#f0e68c">
+                    <tr class="item-row" style="background-color: #f0e68c;">
                 {{else:}}
                     <tr class="item-row">
                 {{pass}}
@@ -124,11 +124,11 @@ Legazpi City"></textarea>
             <th colspan="6">Female</th>
 
         </tr>
-        
+
             {{for f_student in female_students: }}
 
                 {{if f_student.grade.total_units is not None and f_student.grade.total_units < total_units: }}
-                    <tr class="item-row" bgcolor="#f0e68c">
+                    <tr class="item-row" style="background-color: #f0e68c;">
                 {{else:}}
                     <tr class="item-row">
                 {{pass}}

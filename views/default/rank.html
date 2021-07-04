@@ -19,7 +19,7 @@
 
 		<div class="date">
 			
-			<textarea id="date" placeholder="mm/dd/yy"></textarea></td>
+			<textarea id="date" placeholder="mm/dd/yy"></textarea>
 		
 		</div>
 
@@ -211,7 +211,7 @@ Legazpi City"></textarea>
 		{{for student in all_students: }}
 			{{if student.awards.award_title is None:}}
 				{{if student.grade.total_units is not None and student.grade.total_units != 234: }}
-					<tr class="item-row" bgcolor="#f0e68c">
+					<tr class="item-row" style="background-color: #f0e68c;">
 				{{else:}}
 					<tr class="item-row">
 				{{pass}}
