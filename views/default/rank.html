@@ -12,39 +12,41 @@
 <body>
 	<div id="page-wrap">
 
-		<textarea id="header" placeholder="Republic of the Philippines
-        Bicol University
-        COLLEGE OF BUSINESS, ECONOMICS AND MANAGEMENT
-        <Enter Address>"></textarea>
+		<div id="header">
+			<p>Republic of the Philippines</p>
+      <p>Bicol University</p> 
+      <p>Enter College Here</p>
+      <p>Daraga, Albay</p>
+		</div>
 
 		<div class="date">
-			
-			<textarea id="date" placeholder="mm/dd/yy"></textarea>
-		
+			<p id="date">Date</p>
 		</div>
 
 		<div style="clear:both"></div>
 
 		<div id="inside-address">
-			
-			<textarea id="inside-address-content" placeholder="THE UNIVERSITY REGISTRAR
-Bicol University
-Legazpi City"></textarea>
-		
+			<p>THE UNIVERSITY REGISTRAR
+				<br>Bicol University
+				<br>Legazpi City</p>
 		</div>
 
 		<div id="attention">
-			<textarea id="attention-content"
-			placeholder="Attn: UNIVERITY EVALUATION/REVIEW COMMITTEE ON HONOR AND GRADUATES"></textarea>
+			<p>Attn: UNIVERITY EVALUATION/REVIEW COMMITTEE ON HONOR AND GRADUATES</p>
 		</div>
 
 		<div id="greetings">
-			<textarea id="greetings-txt" placeholder="<Sir/Madam:>"></textarea>
+			<p id="greetings-txt">Sir/Madam:</p>
 		</div>
-
+		
 		<div id="letter-body">
-			<textarea id="letter-body-content" 
-			placeholder="	Herewith are the Official List of Candidates for Graduation with Honors under the different degree programs of the <Insert College> for the <semester, academic year>."></textarea>
+			<div id="letter-body-content">
+				<p>Herewith are the Official List of Candidates for Graduation with Honors under the 
+				different degree programs of the</p>
+				<p>College of Business, Economics and Management</p>
+				<p> for the </p>
+				<p>2nd Semester, 2019-2020</P>
+			</div>
 		</div>
 
 		<!-- Table -->
@@ -53,14 +55,14 @@ Legazpi City"></textarea>
 			<tr>
 				<th rowspan="2">No.</th>
 				<th rowspan="2">Name</th>
-                <th colspan="2">Classification</th>
+        <th colspan="2">Classification</th>
 				<th colspan="3">Rating</th>
 				<th rowspan="2">Award</th>
 			</tr>
 			
 			<tr>
-                <th>Regular</th>
-                <th>Irregular</th>
+        <th>Regular</th>
+        <th>Irregular</th>
 				<th>Sum of Grades</th>
 				<th>Total Units</th>
 				<th>Final GWA</th>
