@@ -47,13 +47,16 @@ table td, table th {
 #header {
 	height: 80px;
 	width: 100%;
-	margin-top: 20px;
-	/* background: #222; */
 	text-align: center;
 	color: rgb(0, 0, 0);
 	font: 15px Helvetica, Sans-Serif;
 	text-decoration: uppercase;
 	padding: 8px 0px;
+}
+
+#header p{
+	display: block;
+	margin: 0;
 }
 
 #address {
@@ -69,7 +72,7 @@ table td, table th {
 	text-align: left;
 }
 
-#inside-address-content {
+#inside-address p{
 	font: 15px Helvetica, Sans-Serif;
 	height: 60px;
 	width: 280px;
@@ -85,7 +88,7 @@ table td, table th {
 	padding: 8px 0px;
 }
 
-#attention-content {
+#attention p {
 	width: 100%;
 	text-align: center;
 }
@@ -109,15 +112,13 @@ table td, table th {
 	height: 60px;
 	color: rgb(0, 0, 0);
 	font: 15px Helvetica, Sans-Serif;
-	text-decoration: uppercase;
 	padding: 8px 0px;
 	margin-bottom: 20px;
+	text-indent: 2em;
 }
 
-#letter-body-content {
-	width: 100%;
-	text-align: justify;
-	text-indent: 2em;
+#letter-body-content p {
+	display: inline;
 }
 
 /*table*/
