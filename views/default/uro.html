@@ -15,12 +15,12 @@
         <div id="header">
             <p>Republic of the Philippines</p>
             <p>Bicol University</p>
-            <p>Enter College Here</p>
-            <p>Daraga, Albay</p>
+            <p><b>{{=header_uro[0].college.college_name.upper()}}</b></p>
+            <p>{{=header_uro[0].college.college_address}}</p>
         </div>
         
         <div class="date">
-            <p id="date">date</p>
+            <p id="date">{{=current_date_uro}}</p>
         </div>
 
         <div style="clear:both"></div>
@@ -43,9 +43,10 @@
             <div id="letter-body-content">
                 <p>Herewith are the Official List of Candidates for Graduation with Honors under the 
                 different degree programs of the</p>
-                <p>College of Agriculture</p>
+                <p>{{=header_uro[0].college.college_name}}</p>
                 <p> for the </p>
-                <p>2nd Semester, 2019-2020</P>
+                <p>{{=header_uro[0].header.semester}}, {{=header_uro[0].header\
+                .academic_year}}.</p>
             </div>
 
         </div>

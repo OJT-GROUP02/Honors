@@ -15,12 +15,12 @@
 		<div id="header">
 			<p>Republic of the Philippines</p>
       <p>Bicol University</p> 
-      <p>Enter College Here</p>
-      <p>Daraga, Albay</p>
+      <p><b>{{=header_rank[0].college.college_name.upper()}}</b></p>
+      <p>{{=header_rank[0].college.college_address}}</p>
 		</div>
 
 		<div class="date">
-			<p id="date">Date</p>
+			<p id="date">{{=current_date_rank}}</p>
 		</div>
 
 		<div style="clear:both"></div>
@@ -43,9 +43,10 @@
 			<div id="letter-body-content">
 				<p>Herewith are the Official List of Candidates for Graduation with Honors under the 
 				different degree programs of the</p>
-				<p>College of Business, Economics and Management</p>
+				<p>{{=header_rank[0].college.college_name}}</p>
 				<p> for the </p>
-				<p>2nd Semester, 2019-2020</P>
+				<p>{{=header_rank[0].header.semester}},
+                    {{=header_rank[0].header.academic_year}}.</P>
 			</div>
 		</div>
 
@@ -131,7 +132,9 @@
 
 			<div class="col">
 				<h6 class="member-name" style="text-align:center; margin-top: 10%;"><b>EDNA B. MATA, M.Econ.</b></h6>
-				<h6 class="member-position" style="text-align:center">Coordinator of Student Services</h6>
+				<h6 class="member-position"
+                    style="text-align:center">Coordinator of Student
+                    Services, Member</h6>
                 <br>
                 <h6 class="member-name" style="text-align:center; margin-top: 5%;"><b>SALVADOR M. ABIÑA</b></h6>
                 <h6 class="member-position" style="text-align:center">Registrar II, Chariperson</h6>
@@ -185,7 +188,7 @@
 		
 		<div id="chair">
 			<h6 class="member-name">Juana Dela Cruz</h6>
-			<h6 class="member-position">Co Chairperson</h6>
+			<h6 class="member-position">Chairman</h6>
 		</div>
 
 	

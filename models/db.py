@@ -1,4 +1,4 @@
-db = DAL('postgres://postgres:1612@localhost/honorsdb')
+db = DAL('postgres://postgres:april17@localhost/honors')
 
 db.define_table('awards',
                 Field('award_id'),
@@ -6,10 +6,25 @@ db.define_table('awards',
                 migrate=False
                 )
 
+db.define_table('college',
+                Field('college_id'),
+                Field('college_name'),
+                Field('college_address'),
+                migrate=False
+                )
+
 db.define_table('committee_position',
                 Field('position_id'),
                 Field('hierarchy_id'),
                 Field('position_name'),
+                migrate=False
+                )
+
+db.define_table('header',
+                Field('header_id'),
+                Field('college_id'),
+                Field('semester'),
+                Field('academic_year'),
                 migrate=False
                 )
 
