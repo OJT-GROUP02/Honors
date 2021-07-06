@@ -1,5 +1,5 @@
 def index():
-    return dict(message="Hello")
+    return dict(message="Hello!")
 
 
 def uro():
