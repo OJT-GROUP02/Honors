@@ -1,6 +1,9 @@
 import datetime
 import openpyxl
+import psycopg2
+import itertools
 
+from operator import itemgetter
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils import get_column_letter
 from openpyxl.styles import Font, Border, Alignment, fills, numbers
@@ -76,6 +79,40 @@ def rank():
     return locals()
 
 
+# db connection
+def connect(query):
+    cur = psycopg2.connect(database='honors', user='postgres',
+                           password='april17', host='localhost',
+                            port="5432").cursor()
+    cur.execute(query)
+    desc = cur.description
+    column_names = [col[0] for col in desc]
+    result = [dict(itertools.zip_longest(column_names, row)) for row in cur.fetchall()]
+    # result = cur.fetchall()
+
+    return result
+
+
+# QUERIES
+
+# fetch header data
+header_query = "SELECT header.header_id, college.college_name, " \
+               "college.college_address, header.semester, " \
+               "header.academic_year FROM header LEFT JOIN college on " \
+               "college.college_id = header.college_id WHERE " \
+               "college.college_name = 'College of Business, Economics, " \
+               "and Management' AND header.semester = '2nd Semester' AND " \
+               "academic_year = '2019-2020'"
+
+header = connect(header_query)
+college_name = header[0]["college_name"]
+college_name_upper = header[0]["college_name"].upper()
+college_address = header[0]["college_address"]
+college_semester = header[0]["semester"]
+academic_year = header[0]["academic_year"]
+
+# WORKBOOK
+
 wb = Workbook()
 
 wb.create_sheet("Rank", 0)
@@ -91,9 +128,11 @@ ws.append(['Republic of the Philippines'])
 ws.merge_cells('A1:G1')
 ws.append(['Bicol University'])
 ws.merge_cells('A2:G2')
-ws.append(['College Name'])
+ws.append([college_name_upper])
 ws.merge_cells('A3:G3')
 ws['A3'].font = Font(bold=True)
+ws.append([college_address])
+ws.merge_cells('A4:G4')
 
 for row in ws.iter_rows():
     for cell in row:
@@ -107,8 +146,10 @@ for row in ws.iter_rows():
 #         ws.cell(row, col).alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 
 # Date
-ws['G5'].value = "Date Today"
-ws['G5'].alignment = Alignment(horizontal='right')
+date = str(datetime.datetime.today().strftime('%B %d, %Y'))
+date_today = ws['G5']
+date_today.value = date
+date_today.alignment = Alignment(horizontal='right')
 
 
 # Inside Address
@@ -142,11 +183,8 @@ ws['A16'].value = "Herewith are the Official List of Candidates for Graduation w
 ws['A16'].alignment = Alignment(horizontal='left', indent=1)
 ws.merge_cells('A16:G16')
 
-ws['A17'].value = " of the _________________________ for the _________________ "
+ws['A17'].value = f" of the {college_name}  for the {college_semester}, {academic_year} "
 ws['A17'].alignment = Alignment(horizontal='left')
 ws.merge_cells('A17:G17')
-
-
-
 
 wb.save('static/Honors.xlsx')
