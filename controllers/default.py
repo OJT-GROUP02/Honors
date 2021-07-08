@@ -196,11 +196,11 @@ ws['A15'].alignment = Alignment(horizontal='left')
 for row in range (16, 18):
    ws.row_dimensions[(row)].bestFit=True
    
-ws['A16'].value = "Herewith are the Official List of Candidates for Graduation with Honors under the different degree programs"
-ws['A16'].alignment = Alignment(horizontal='left', indent=1)
+ws['A16'].value = "Herewith are the Official List of Candidates for Graduation with Honors under the different"
+ws['A16'].alignment = Alignment(horizontal='left', indent=2)
 ws.merge_cells('A16:F16')
 
-ws['A17'].value = f" of the {college_name}  for the {college_semester}, {academic_year} "
+ws['A17'].value = f"degree programs of the {college_name}  for the {college_semester}, {academic_year}."
 ws['A17'].alignment = Alignment(horizontal='left')
 ws.merge_cells('A17:F17')
 
@@ -247,11 +247,11 @@ for row in rows:
     for cell in row:
         cell.font = font_size
 
-ws['A88'].value = "Note: Subject for verification/recommendation/approval by the University Evaluation/Review Committee"
-ws['A88'].alignment = Alignment(horizontal='left', indent=1)
+ws['A88'].value = "Note: Subject for verification/recommendation/approval by the University Evaluation/Review"
+ws['A88'].alignment = Alignment(horizontal='left', indent=2)
 ws.merge_cells('A88:F88')
-ws['A89'].value = "on Honor Graduates"
-ws['A89'].alignment = Alignment(horizontal='left', indent=1)
+ws['A89'].value = "Committee on Honor Graduates"
+ws['A89'].alignment = Alignment(horizontal='left', indent=6)
 ws.merge_cells('A89:F89')
 
 wb.save('static/Honors.xlsx')
