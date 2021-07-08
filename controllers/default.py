@@ -6,9 +6,11 @@ import itertools
 from operator import itemgetter
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils import get_column_letter
-from openpyxl.styles import Font, Border, Alignment, fills, numbers
+from openpyxl.styles import Border, Side
+from openpyxl.styles import Font, Alignment, fills, numbers
 from openpyxl.worksheet.dimensions import ColumnDimension
 from openpyxl.descriptors.excel import UniversalMeasure, Relation
+from openpyxl.worksheet.table import Table, TableStyleInfo
 
 
 def index():
@@ -81,8 +83,11 @@ def rank():
 
 # db connection
 def connect(query):
-    cur = psycopg2.connect(database='honors', user='postgres',
-                           password='april17', host='localhost',
+    # cur = psycopg2.connect(database='honors', user='postgres',
+    #                        password='april17', host='localhost',
+    #                         port="5432").cursor()
+    cur = psycopg2.connect(database='honorsdb', user='postgres',
+                           password='1612', host='localhost',
                             port="5432").cursor()
     cur.execute(query)
     desc = cur.description
@@ -100,8 +105,8 @@ header_query = "SELECT header.header_id, college.college_name, " \
                "college.college_address, header.semester, " \
                "header.academic_year FROM header LEFT JOIN college on " \
                "college.college_id = header.college_id WHERE " \
-               "college.college_name = 'College of Business, Economics, " \
-               "and Management' AND header.semester = '2nd Semester' AND " \
+               "college.college_name = 'College of Social Sciences and Philosophy' \
+               AND header.semester = '2nd Semester' AND " \
                "academic_year = '2019-2020'"
 
 header = connect(header_query)
@@ -174,7 +179,6 @@ ws['A15'].value = "Sir/Madam:"
 ws['A15'].alignment = Alignment(horizontal='left')
 
 #Letter Body
-# ws.row_dimensions[16].bestFit=True
 
 for row in range (16, 18):
    ws.row_dimensions[(row)].bestFit=True
@@ -186,5 +190,16 @@ ws.merge_cells('A16:G16')
 ws['A17'].value = f" of the {college_name}  for the {college_semester}, {academic_year} "
 ws['A17'].alignment = Alignment(horizontal='left')
 ws.merge_cells('A17:G17')
+
+#table
+
+thin = Side(border_style="thin", color="000000")# border style, color 
+border = Border(left=thin, right=thin, top=thin, bottom=thin)# the position of the border 
+
+rows = ws.iter_cols(min_row=19, min_col=1, max_row=86, max_col=7)
+
+for row in rows:
+    for cell in row:
+        cell.border = border
 
 wb.save('static/Honors.xlsx')

@@ -1,7 +1,10 @@
 #uncomment the right DAL when coding and testing
 
-# db = DAL('postgres://postgres:april17@localhost/honors') ivee
-db = DAL('postgres://postgres:1612@localhost/honorsdb') #maedel
+# ivee
+# db = DAL('postgres://postgres:april17@localhost/honors') 
+
+#maedel
+db = DAL('postgres://postgres:1612@localhost/honorsdb') 
 
 db.define_table('awards',
                 Field('award_id'),
