@@ -198,16 +198,18 @@ border = Border(left=thin, right=thin, top=thin, bottom=thin)# the position of t
 
 rows = ws.iter_cols(min_row=19, min_col=1, max_row=86, max_col=6)
 
+# border
 for row in rows:
     for cell in row:
         cell.border = border
 
+#center table contents
 rows = ws.iter_cols(min_row=19, min_col=1, max_row=86, max_col=6)
-
 for row in rows:
     for cell in row:
         cell.alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 
+# table header
 ws['A19'].value = "NO"
 ws.merge_cells(start_row=19, start_column=1, end_row=20, end_column=1)
 ws['B19'].value = "NAME"
@@ -219,5 +221,13 @@ ws['D20'].value = "Total Units"
 ws['E20'].value = "Final GWA"
 ws['F19'].value = "AWARD"
 ws.merge_cells(start_row=19, start_column=6, end_row=20, end_column=6)
+
+
+font = Font(name='Calibri', size=9, bold=False, italic=False, vertAlign=None, underline='none', strike=False)
+
+rows = ws.iter_cols(min_row=21, min_col=1, max_row=86, max_col=6)
+for row in rows:
+    for cell in row:
+        cell.font = font
 
 wb.save('static/Honors.xlsx')
