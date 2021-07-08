@@ -11,6 +11,7 @@ from openpyxl.styles import Font, Alignment, fills, numbers
 from openpyxl.worksheet.dimensions import ColumnDimension
 from openpyxl.descriptors.excel import UniversalMeasure, Relation
 from openpyxl.worksheet.table import Table, TableStyleInfo
+from openpyxl.worksheet.pagebreak import Break
 
 
 def index():
@@ -127,6 +128,18 @@ ws = wb["URO"]
 ColumnDimension(ws, auto_size=True)
 ws.page_setup.paperHeight = '13in'
 ws.page_setup.paperWidth = '8.5in'
+ws.page_margins.left = 0.50
+ws.page_margins.rigt = 0.50
+# ws.print_options.verticalCentered = True
+# ws.print_options.horizontalCentered = True
+
+# column sizes
+ws.column_dimensions["A"].width = 5
+ws.column_dimensions["B"].width = 32
+ws.column_dimensions["C"].width = 9
+ws.column_dimensions["D"].width = 9
+ws.column_dimensions["E"].width = 12
+ws.column_dimensions["F"].width = 25
 
 # Heading
 ws.append(['Republic of the Philippines'])
@@ -139,10 +152,10 @@ ws['A3'].font = Font(bold=True)
 ws.append([college_address])
 ws.merge_cells('A4:F4')
 
-for row in ws.iter_rows():
+rows = ws.iter_cols(min_row=1, min_col=1, max_row=4, max_col=6)
+for row in rows:
     for cell in row:
-        cell.alignment = Alignment(
-            wrap_text=True, horizontal='center', vertical='center')
+        cell.alignment = Alignment(wrap_text=True, horizontal='center', vertical='center')
 
 # rows = range(1, 8)
 # columns = range(1, 5)
@@ -210,7 +223,7 @@ for row in rows:
         cell.alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 
 # table header
-ws['A19'].value = "NO"
+ws['A19'].value = "NO."
 ws.merge_cells(start_row=19, start_column=1, end_row=20, end_column=1)
 ws['B19'].value = "NAME"
 ws.merge_cells(start_row=19, start_column=2, end_row=20, end_column=2)
@@ -222,12 +235,23 @@ ws['E20'].value = "Final GWA"
 ws['F19'].value = "AWARD"
 ws.merge_cells(start_row=19, start_column=6, end_row=20, end_column=6)
 
+bold_font = Font(bold=True)
+for cell in ws["19:19"]:
+    cell.font = bold_font
+for cell in ws["20:20"]:
+    cell.font = bold_font
 
-font = Font(name='Calibri', size=9, bold=False, italic=False, vertAlign=None, underline='none', strike=False)
-
+font_size = Font(name='Calibri', size=9)
 rows = ws.iter_cols(min_row=21, min_col=1, max_row=86, max_col=6)
 for row in rows:
     for cell in row:
-        cell.font = font
+        cell.font = font_size
+
+ws['A88'].value = "Note: Subject for verification/recommendation/approval by the University Evaluation/Review Committee"
+ws['A88'].alignment = Alignment(horizontal='left', indent=1)
+ws.merge_cells('A88:F88')
+ws['A89'].value = "on Honor Graduates"
+ws['A89'].alignment = Alignment(horizontal='left', indent=1)
+ws.merge_cells('A89:F89')
 
 wb.save('static/Honors.xlsx')
