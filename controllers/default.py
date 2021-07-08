@@ -209,6 +209,7 @@ for row in rows:
         cell.alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 
 ws['A19'].value = "NO"
+ws.merge_cells(start_row=19, start_column=1, end_row=20, end_column=1)
 ws['B19'].value = "NAME"
 ws.merge_cells(start_row=19, start_column=2, end_row=20, end_column=2)
 ws['C19'].value = "RATING"
