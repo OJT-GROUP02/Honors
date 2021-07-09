@@ -484,7 +484,12 @@ range_max = 'F' + str(total_rows_after_table + 20)
 ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
 
-#RANK SHEET
+#RANK SHEET ---------------------------------------------
+# palitan na lang ang arguments
+cur = psycopg2.connect(database='sirDB', user='postgres',
+                        password='1201', host='localhost',
+                        port="5432").cursor()
+
 ws = wb["Rank"]
 ColumnDimension(ws, auto_size=True)
 ws.page_setup.paperHeight = '13in'
