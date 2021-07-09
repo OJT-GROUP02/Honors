@@ -503,6 +503,20 @@ ws['G20'].value = "Final GWA"
 ws['H19'].value = "AWARDS"
 ws.merge_cells(start_row=19, start_column=8, end_row=20, end_column=8)
 
+bold_font = Font(bold=True)
+for cell in ws["19:19"]:
+    cell.font = bold_font
+for cell in ws["20:20"]:
+    cell.font = bold_font
+
+font_size = Font(name='Calibri', size=9)
+rows = ws.iter_cols(min_row=21, min_col=1,
+                    max_row=minimum_row + m_total_rows + f_total_rows + 3,
+                    max_col=8)
+for row in rows:
+    for cell in row:
+        cell.font = font_size
+
 #Committee
 ws['A79'].value = "EVALUATION COMMITTEE:"
 ws.merge_cells('A79:B79')
