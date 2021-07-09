@@ -106,7 +106,8 @@ header_query = "SELECT header.header_id, college.college_name, " \
                "college.college_address, header.semester, " \
                "header.academic_year FROM header LEFT JOIN college on " \
                "college.college_id = header.college_id WHERE " \
-               "college.college_name = 'College of Social Sciences and Philosophy' \
+               "college.college_name = 'College of Business, Economics, " \
+               "and Management' \
                AND header.semester = '2nd Semester' AND " \
                "academic_year = '2019-2020'"
 
@@ -222,10 +223,10 @@ ws['A15'].alignment = Alignment(horizontal='left')
 for row in range (16, 18):
    ws.row_dimensions[(row)].bestFit=True
 
-ws['A16'].value = "Herewith are the Official List of Candidates for Graduation with Honors under the different"
+ws['A16'].value = "Herewith are the Official List of Candidates for Graduation with Honors under the different degree "
 ws['A16'].alignment = Alignment(horizontal='left', indent=2)
 ws.merge_cells('A16:F16')
-ws['A17'].value = f"degree programs of the {college_name}  for the {college_semester}, {academic_year}."
+ws['A17'].value = f"programs of the {college_name}  for the {college_semester}, {academic_year}."
 ws['A17'].alignment = Alignment(horizontal='left')
 ws.merge_cells('A17:F17')
 
