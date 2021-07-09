@@ -507,9 +507,9 @@ ws.column_dimensions["A"].width = 5
 ws.column_dimensions["B"].width = 25
 ws.column_dimensions["C"].width = 7
 ws.column_dimensions["D"].width = 7
-ws.column_dimensions["E"].width = 9 
-ws.column_dimensions["F"].width = 9
-ws.column_dimensions["G"].width = 9
+ws.column_dimensions["E"].width = 8 
+ws.column_dimensions["F"].width = 8
+ws.column_dimensions["G"].width = 8
 ws.column_dimensions["H"].width = 20
 
 # Heading
