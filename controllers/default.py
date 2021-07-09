@@ -509,13 +509,13 @@ ws.page_setup.paperWidth = '8.5in'
 
 # column sizes
 ws.column_dimensions["A"].width = 5
-ws.column_dimensions["B"].width = 25
+ws.column_dimensions["B"].width = 30
 ws.column_dimensions["C"].width = 7
 ws.column_dimensions["D"].width = 7
-ws.column_dimensions["E"].width = 8 
-ws.column_dimensions["F"].width = 8
-ws.column_dimensions["G"].width = 8
-ws.column_dimensions["H"].width = 20
+ws.column_dimensions["E"].width = 7 
+ws.column_dimensions["F"].width = 7
+ws.column_dimensions["G"].width = 7
+ws.column_dimensions["H"].width = 18
 
 # Heading
 ws.append(['Republic of the Philippines'])
