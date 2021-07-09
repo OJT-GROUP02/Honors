@@ -6,8 +6,7 @@ import itertools
 from operator import itemgetter
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils import get_column_letter
-from openpyxl.styles import Border, Side
-from openpyxl.styles import Font, Alignment, fills, numbers, PatternFill
+from openpyxl.styles import Font, Alignment, fills, numbers, PatternFill, Border, Side
 from openpyxl.worksheet.dimensions import ColumnDimension
 from openpyxl.descriptors.excel import UniversalMeasure, Relation
 from openpyxl.worksheet.table import Table, TableStyleInfo
@@ -409,7 +408,7 @@ ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
 ws['A' + str(total_rows_after_table + 7)].value = "COLLEGE/CAMPUS EVALUATION/REVIEW COMMITTEE"
 ws['A' + str(total_rows_after_table + 7)].alignment = Alignment(
-    horizontal='center', indent=2)
+    horizontal='center')
 ws['A' + str(total_rows_after_table + 7)].font = Font(bold=True)
 range_min = 'A' + str(total_rows_after_table + 7)
 range_max = 'F' + str(total_rows_after_table + 7)
