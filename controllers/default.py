@@ -502,6 +502,16 @@ ColumnDimension(ws, auto_size=True)
 ws.page_setup.paperHeight = '13in'
 ws.page_setup.paperWidth = '8.5in'
 
+# column sizes
+ws.column_dimensions["A"].width = 5
+ws.column_dimensions["B"].width = 25
+ws.column_dimensions["C"].width = 7
+ws.column_dimensions["D"].width = 7
+ws.column_dimensions["E"].width = 9 
+ws.column_dimensions["F"].width = 9
+ws.column_dimensions["G"].width = 9
+ws.column_dimensions["H"].width = 20
+
 # Heading
 ws.append(['Republic of the Philippines'])
 ws.merge_cells('A1:H1')
@@ -517,12 +527,7 @@ for row in ws.iter_rows():
     for cell in row:
         cell.alignment = Alignment(
             wrap_text=True, horizontal='center', vertical='center')
-
-# rows = range(1, 8)
-# columns = range(1, 5)
-# for row in rows:
-#     for col in columns:
-#         ws.cell(row, col).alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+        
 
 # Date
 date = str(datetime.datetime.today().strftime('%B %d, %Y'))
@@ -592,11 +597,10 @@ ws['G20'].value = "Final GWA"
 ws['H19'].value = "AWARDS"
 ws.merge_cells(start_row=19, start_column=8, end_row=20, end_column=8)
 
-bold_font = Font(bold=True)
 for cell in ws["19:19"]:
-    cell.font = bold_font
+    cell.font = font_size = Font(name='Calibri', size=10, bold=True)
 for cell in ws["20:20"]:
-    cell.font = bold_font
+    cell.font = font_size = Font(name='Calibri', size=10, bold=True)
 
 font_size = Font(name='Calibri', size=9)
 rows = ws.iter_cols(min_row=21, min_col=1,
