@@ -599,6 +599,91 @@ for row in rows:
     for cell in row:
         cell.font = font_size
 
+
+# ----------------------- TABLE 1 -----------------------
+# Table data
+student_list = []
+cur.execute('SELECT * from student')
+for student in cur:
+    stud_row = list(student)
+    student_list.append(stud_row)
+
+grade_list = []
+cur.execute('SELECT * from grade')
+for grade in cur:
+    grade_row = list(grade)
+    grade_list.append(grade_row)
+            
+award_list = []
+cur.execute('SELECT * from awards')
+for award in cur:
+    award_row = list(award)
+    award_list.append(award_row)
+
+student_list.sort()
+grade_list.sort()
+    
+table_1_num = 0
+total_stud_num = len(student_list)
+for i in range(0, len(student_list)):
+    if student_list[i][5] != None:
+        table_1_num += 1
+
+table_2_num = total_stud_num - table_1_num
+
+table_1_num_row = 21
+# ----------- Table 1 ---------
+for i in range(0,table_1_num + 1):
+
+    # Grade items
+    grade_units = grade_list[i][2]
+    grade_id = grade_list[i][5]         # award id
+    grade_sum = grade_list[i][3]
+    grade_gwa = grade_list[i][4]
+
+    # Student items
+    stud_name = student_list[i][2] + ' ' + student_list[i][3] + ' ' + student_list[i][1]
+    stud_classification = student_list[i][5]
+
+    # Award items
+    if grade_id != None:
+        award_id = award_list[grade_id - 1][0]
+        award_title = award_list[grade_id - 1][1]
+
+        reg_tuple = (str(i) + '.', stud_name, '✔','', grade_units, grade_sum, grade_gwa, award_title)
+        irreg_tuple = (str(i) + '.', stud_name, '','✔', grade_units, grade_sum, grade_gwa, award_title)
+
+        reg_list = list(reg_tuple)
+        irreg_list = list(irreg_tuple)
+
+        if stud_classification == 'Regular':
+            for j in range(1, len(reg_list) + 1):
+                char = get_column_letter(j)
+                if reg_list[j - 1] == grade_gwa:
+                    ws[char + str(table_1_num_row)].value = reg_list[j - 1]
+                    ws[char + str(table_1_num_row)].font = \
+                        Font(color="9d0008", name='Calibri', size=9, bold=True)
+                    ws[char + str(table_1_num_row)].fill = \
+                        PatternFill(fill_type='solid', fgColor="fbc3cb")
+                else:
+                    ws[char + str(table_1_num_row)].value = reg_list[j - 1]
+
+        if stud_classification == 'Irregular':
+            for j in range(1, len(irreg_list) + 1):
+                char = get_column_letter(j)
+                if irreg_list[j - 1] == grade_gwa:
+                    ws[char + str(table_1_num_row)].value = irreg_list[j - 1]
+                    ws[char + str(table_1_num_row)].font = \
+                        Font(color="9d0008", name='Calibri', size=9, bold=True)
+                    ws[char + str(table_1_num_row)].fill = \
+                        PatternFill(fill_type='solid', fgColor="fbc3cb")
+                else:
+                    ws[char + str(table_1_num_row)].value = irreg_list[j - 1]
+        
+        table_1_num_row += 1
+
+# ----------------------- END OF TABLE 1 -----------------------
+        
 #Committee
 ws['A79'].value = "EVALUATION COMMITTEE:"
 ws.merge_cells('A79:B79')
@@ -733,6 +818,76 @@ for row in rows:
         cell.alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 
 
+# ----------------------- TABLE 2 -----------------------
+table_2_num_row = 125
+honor_stud = []
+other_stud = []
+# Sorting of student according to honor roles
+for i in range(0, len(student_list)):
+    if student_list[i][5] != None:
+        honor_stud.append(student_list[i])
+    else:
+        other_stud.append(student_list[i])
+    
+i = 57
+j = 1
+for stud in other_stud:
+
+    # Student items
+    stud_id = stud[0]
+    stud_name = stud[2] + ' ' + stud[3] + ' ' + stud[1]
+                
+    # Grade items
+    grade_units = grade_list[i][2]
+    grade_id = grade_list[i][5]         # award id
+    grade_sum = grade_list[i][3]
+    grade_gwa = grade_list[i][4]
+
+    none_tuple = (str(i + 1) + '.', stud_name, '','', grade_units, grade_sum, grade_gwa)
+    none_list = list(none_tuple)
+
+    if stud[2] != 'Jhon Christian':
+        if grade_units == 234:
+            for k in range(1, len(none_list) + 1):
+                char = get_column_letter(k)
+                ws[char + str(table_2_num_row)].value = none_list[k - 1]
+            i += 1   
+            
+        # yellow 
+        else:
+            if grade_units != None:
+                for k in range(1, len(none_list) + 1):
+                    char = get_column_letter(k)
+                    ws[char + str(table_2_num_row)].value = none_list[k - 1]
+                    ws[char + str(table_2_num_row)].font = \
+                        Font(color="9d0008", name='Calibri', size=9, bold=True)
+                    ws[char + str(table_2_num_row)].fill = \
+                        PatternFill(fill_type='solid', fgColor="f0e68c")
+                    if k == 7:
+                        ws[char + str(table_2_num_row)].fill = \
+                        PatternFill(fill_type='solid', fgColor="fbc3cb") 
+            else:
+                for k in range(1, len(none_list) + 1):
+                    char = get_column_letter(k)
+                    ws[char + str(table_2_num_row)].value = none_list[k - 1]
+            i += 1   
+         
+    if i == 61:
+        for stud in other_stud:
+            if stud[2] == 'Jhon Christian':
+                stud_name = stud[2] + ' ' + stud[3] + ' ' + stud[1]
+                grade_units = grade_list[0][2]
+                grade_sum = grade_list[0][3]
+                grade_gwa = grade_list[0][4]
+                for k in range(1, len(none_list) + 1):
+                    char = get_column_letter(k)
+                    none_tuple = (str(i) + '.', stud_name, '','', grade_units, grade_sum, grade_gwa)
+                    none_list = list(none_tuple)
+                    ws[char + str(table_2_num_row)].value = none_list[k - 1]  
+        i += 1
+    table_2_num_row += 1
+
+# ----------------------- END OF TABLE 2 -----------------------
 
 wb.save('static/Honors.xlsx')
 # ivee
