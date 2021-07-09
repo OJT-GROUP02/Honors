@@ -370,7 +370,7 @@ for f_student in f_students:
     count += 1
 
 #left align table data
-table_total_rows = min_row_m + f_total_rows
+table_total_rows = min_row_m + max_row_f
 for table_total_row in range (min_row_m, table_total_rows):
         ws['B' + str(table_total_row)].alignment = Alignment(horizontal='left')
 
