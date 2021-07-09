@@ -87,7 +87,7 @@ def connect(query):
     #                        password='postgres', host='localhost',
     #                         port="5432").cursor()
     cur = psycopg2.connect(database='honorsdb', user='postgres',
-                           password='1612', host='localhost',
+                           password='postgres', host='localhost',
                             port="5432").cursor()
     cur.execute(query)
     desc = cur.description
@@ -106,7 +106,7 @@ header_query = "SELECT header.header_id, college.college_name, " \
                "header.academic_year FROM header LEFT JOIN college on " \
                "college.college_id = header.college_id WHERE " \
                "college.college_name = 'College of Business, Economics, " \
-               "and Management' \
+                "and Management' \
                AND header.semester = '2nd Semester' AND " \
                "academic_year = '2019-2020'"
 
@@ -499,7 +499,7 @@ ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
 #maedel
 cur = psycopg2.connect(database='honorsdb', user='postgres',
-                        password='1612', host='localhost',
+                        password='postgres', host='localhost',
                         port="5432").cursor()
 
 ws = wb["Rank"]
@@ -706,12 +706,14 @@ ws.merge_cells('A79:B79')
 ws['A79'].font = Font(bold=True)
 
 ws['B81'].value = '_________________________'
+ws['B81'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('B81:C81')
 ws['B82'].value = "Committee"
 ws['B82'].font = Font(bold=True)
 ws['B82'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('B82:C82')
 ws['B83'].value = "Position"
+ws['B83'].font = Font(size=11)
 ws['B83'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('B83:C83')
 
@@ -722,16 +724,19 @@ ws['F82'].font = Font(bold=True)
 ws['F82'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('F82:G82')
 ws['F83'].value = "Position"
+ws['F83'].font = Font(size=11)
 ws['F83'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('F83:G83')
 
 ws['B86'].value = '_________________________'
+ws['B86'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('B86:C86')
 ws['B87'].value = "Committee"
 ws['B87'].font = Font(bold=True)
 ws['B87'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('B87:C87')
 ws['B88'].value = "Position"
+ws['B88'].font = Font(size=11)
 ws['B88'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('B88:C88')
 
@@ -742,19 +747,23 @@ ws['F87'].font = Font(bold=True)
 ws['F87'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('F87:G87')
 ws['F88'].value = "Position"
+ws['F88'].font = Font(size=11)
 ws['F88'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('F88:G88')
 
 ws['C91'].value = "Note:"
+ws['C91'].font = Font(size=11)
 ws['F88'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 
 ws['D92'].value = '_________________________'
+ws['D92'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('D92:E92')
 ws['D93'].value = "Committee"
 ws['D93'].font = Font(bold=True)
 ws['D93'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('D93:E93')
 ws['D94'].value = "Position"
+ws['D94'].font = Font(size=11)
 ws['D94'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('D94:E94')
 
@@ -762,43 +771,51 @@ ws.merge_cells('D94:E94')
 ws['B104'].value = "Note: Subject for verification/recommendation/approval by the University Evaluation/Review Committee"
 ws['B104'].alignment = Alignment(horizontal='left', indent=1)
 ws.merge_cells('B104:H104')
+ws['B104'].font = Font(size=11)
 
 ws['B105'].value = "on Honor Graduates"
 ws['B105'].alignment = Alignment(horizontal='left', indent=1)
+ws['B105'].font = Font(size=11)
 ws.merge_cells('B105:C105')
 
 ws['B107'].value = "Attached are the individual collegiate student's permanent record with the individual computation of grades"
+ws['B107'].font = Font(size=11)
 ws['B107'].alignment = Alignment(horizontal='left', indent=1)
 ws.merge_cells('B107:H107')
 
 ws['A108'].value = "and other important documents of the respective honor graduates for comments, recommendations and approval"
 ws['A108'].alignment = Alignment(horizontal='left', indent=1)
+ws['A108'].font = Font(size=11)
 ws.merge_cells('A108:H108')
 
-ws['B111'].value = "COLLEGE/CAMPUS EVALUATION/REVIEW COMMITTEE"
-ws.merge_cells('B111:G111')
-ws['B111'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws['B111'].font = Font(bold=True)
+ws['A111'].value = "COLLEGE/CAMPUS EVALUATION/REVIEW COMMITTEE"
+ws.merge_cells('A111:H111')
+ws['A111'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws['A111'].font = Font(bold=True)
 
 ws['A113'].value = '_________________________'
+ws['A113'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('A113:B113')
 ws['A114'].value = "Member"
 ws['A114'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('A114:B114')
 
 ws['C113'].value = '_________________________'
+ws['C113'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('C113:D113')
 ws['C114'].value = "Member"
 ws['C114'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('C114:D114')
 
 ws['E113'].value = '_________________________'
+ws['E113'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('E113:F113')
 ws['E114'].value = "Member"
 ws['E114'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('E114:F114')
 
 ws['G113'].value = '_________________________'
+ws['G113'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 ws.merge_cells('G113:H113')
 ws['G114'].value = "Member"
 ws['G114'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
@@ -864,6 +881,8 @@ for stud in other_stud:
             for k in range(1, len(none_list) + 1):
                 char = get_column_letter(k)
                 ws[char + str(table_2_num_row)].value = none_list[k - 1]
+                ws[char + str(table_2_num_row)].font = \
+                        Font(name='Calibri', size=9)
             i += 1  
             table_2_num_row += 1 
             
@@ -885,6 +904,8 @@ for stud in other_stud:
                 for k in range(1, len(none_list) + 1):
                     char = get_column_letter(k)
                     ws[char + str(table_2_num_row)].value = none_list[k - 1]
+                    ws[char + str(table_2_num_row)].font = \
+                        Font(name='Calibri', size=9)
             i += 1  
             table_2_num_row += 1 
          
@@ -899,7 +920,9 @@ for stud in other_stud:
                     char = get_column_letter(k)
                     none_tuple = (str(i + 1), stud_name, '','', grade_units, grade_sum, grade_gwa)
                     none_list = list(none_tuple)
-                    ws[char + str(table_2_num_row)].value = none_list[k - 1]  
+                    ws[char + str(table_2_num_row)].value = none_list[k - 1]
+                    ws[char + str(table_2_num_row)].font = \
+                        Font(name='Calibri', size=9)  
         i += 1
         table_2_num_row += 1
     j += 1
