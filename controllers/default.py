@@ -84,12 +84,12 @@ def rank():
 
 # db connection
 def connect(query):
-    cur = psycopg2.connect(database='honorsdb', user='postgres',
-                           password='postgres', host='localhost',
-                            port="5432").cursor()
     # cur = psycopg2.connect(database='honorsdb', user='postgres',
-    #                        password='1612', host='localhost',
+    #                        password='postgres', host='localhost',
     #                         port="5432").cursor()
+    cur = psycopg2.connect(database='honorsdb', user='postgres',
+                           password='1612', host='localhost',
+                            port="5432").cursor()
     cur.execute(query)
     desc = cur.description
     column_names = [col[0] for col in desc]
@@ -102,21 +102,21 @@ def connect(query):
 # QUERIES
 
 # fetch header data
-# header_query = "SELECT header.header_id, college.college_name, " \
-#                "college.college_address, header.semester, " \
-#                "header.academic_year FROM header LEFT JOIN college on " \
-#                "college.college_id = header.college_id WHERE " \
-#                "college.college_name = 'College of Social Sciences and Philosophy' \
-#                AND header.semester = '2nd Semester' AND " \
-#                "academic_year = '2019-2020'"
-
 header_query = "SELECT header.header_id, college.college_name, " \
                "college.college_address, header.semester, " \
                "header.academic_year FROM header LEFT JOIN college on " \
                "college.college_id = header.college_id WHERE " \
-               "college.college_name = 'College of Arts and Letters' \
+               "college.college_name = 'College of Social Sciences and Philosophy' \
                AND header.semester = '2nd Semester' AND " \
                "academic_year = '2019-2020'"
+
+# header_query = "SELECT header.header_id, college.college_name, " \
+#                "college.college_address, header.semester, " \
+#                "header.academic_year FROM header LEFT JOIN college on " \
+#                "college.college_id = header.college_id WHERE " \
+#                "college.college_name = 'College of Arts and Letters' \
+#                AND header.semester = '2nd Semester' AND " \
+#                "academic_year = '2019-2020'"
 
 header = connect(header_query)
 college_name = header[0]["college_name"]
@@ -190,18 +190,11 @@ for row in rows:
     for cell in row:
         cell.alignment = Alignment(wrap_text=True, horizontal='center', vertical='center')
 
-# rows = range(1, 8)
-# columns = range(1, 5)
-# for row in rows:
-#     for col in columns:
-#         ws.cell(row, col).alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-
 # Date
 date = str(datetime.datetime.today().strftime('%B %d, %Y'))
 date_today = ws['F5']
 date_today.value = date
 date_today.alignment = Alignment(horizontal='right')
-
 
 # Inside Address
 ws['A7'].value = "THE BICOL UNIVERSITY REGISTRAR"
@@ -232,7 +225,6 @@ for row in range (16, 18):
 ws['A16'].value = "Herewith are the Official List of Candidates for Graduation with Honors under the different"
 ws['A16'].alignment = Alignment(horizontal='left', indent=2)
 ws.merge_cells('A16:F16')
-
 ws['A17'].value = f"degree programs of the {college_name}  for the {college_semester}, {academic_year}."
 ws['A17'].alignment = Alignment(horizontal='left')
 ws.merge_cells('A17:F17')
@@ -241,23 +233,14 @@ ws.merge_cells('A17:F17')
 
 thin = Side(border_style="thin", color="000000")# border style, color
 border = Border(left=thin, right=thin, top=thin, bottom=thin)# the position of the border
-
 rows = ws.iter_cols(min_row=19, min_col=1,
                     max_row=minimum_row + m_total_rows + f_total_rows + 3,
                     max_col=6)
 
-# border
 for row in rows:
     for cell in row:
         cell.border = border
-
-#center table contents
-rows = ws.iter_cols(min_row=19, min_col=1,
-                    max_row=minimum_row + m_total_rows + f_total_rows + 3,
-                    max_col=6)
-for row in rows:
-    for cell in row:
-        cell.alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+        cell.alignment = Alignment(horizontal='center', vertical='center', wrapText=True)   
 
 # table header
 ws['A19'].value = "NO."
@@ -278,6 +261,7 @@ for cell in ws["19:19"]:
 for cell in ws["20:20"]:
     cell.font = bold_font
 
+# table data font (smaller)
 font_size = Font(name='Calibri', size=9)
 rows = ws.iter_cols(min_row=21, min_col=1,
                     max_row=minimum_row + m_total_rows + f_total_rows + 3,
@@ -387,6 +371,10 @@ for f_student in f_students:
 
 total_rows_after_table = minimum_row + min_row_m + f_total_rows + 3
 
+rows = ws.iter_cols(min_row=19, min_col=1,
+                    max_row=minimum_row + m_total_rows + f_total_rows + 3,
+                    max_col=6)
+        
 ws['A' + str(total_rows_after_table)].value = "Note: Subject for verification/recommendation/approval by the University Evaluation/Review"
 ws['A' + str(total_rows_after_table)].alignment = Alignment(horizontal='left', indent=2)
 range_min = 'A' + str(total_rows_after_table)
@@ -399,6 +387,100 @@ ws['A' + str(total_rows_after_table + 1)].alignment = Alignment(
 range_min = 'A' + str(total_rows_after_table + 1)
 range_max = 'F' + str(total_rows_after_table + 1)
 ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+ws['A' + str(total_rows_after_table + 3)].value = "Attached are the individual collegiate student's " \
+                                                "permanent record with the individual computation of "
+ws['A' + str(total_rows_after_table + 3)].alignment = Alignment(
+    horizontal='left', indent=2)
+range_min = 'A' + str(total_rows_after_table + 3)
+range_max = 'F' + str(total_rows_after_table + 3)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+ws.append(['grades and other important documents of the respective honor graduates for comments, recommendation '])
+range_min = 'A' + str(total_rows_after_table + 4)
+range_max = 'F' + str(total_rows_after_table + 4)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+ws.append(['and approval.'])
+range_min = 'A' + str(total_rows_after_table + 5)
+range_max = 'F' + str(total_rows_after_table + 5)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+ws['A' + str(total_rows_after_table + 7)].value = "COLLEGE/CAMPUS EVALUATION/REVIEW COMMITTEE"
+ws['A' + str(total_rows_after_table + 7)].alignment = Alignment(
+    horizontal='center', indent=2)
+ws['A' + str(total_rows_after_table + 7)].font = Font(bold=True)
+range_min = 'A' + str(total_rows_after_table + 7)
+range_max = 'F' + str(total_rows_after_table + 7)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+#members
+ws['B' + str(total_rows_after_table + 9)].value = "Member N. Name"
+ws['B' + str(total_rows_after_table + 9)].alignment = Alignment(
+    horizontal='center')
+ws['B' + str(total_rows_after_table + 9)].font = Font(
+    bold=True)
+ws['B' + str(total_rows_after_table + 10)].value = "Member"
+ws['B' + str(total_rows_after_table + 10)].alignment = Alignment(
+    horizontal='center')
+ws['F' + str(total_rows_after_table + 9)].value = "Member N. Name"
+ws['F' + str(total_rows_after_table + 9)].alignment = Alignment(
+    horizontal='center')
+ws['F' + str(total_rows_after_table + 9)].font = Font(
+    bold=True)
+ws['F' + str(total_rows_after_table + 10)].value = "Member"
+ws['F' + str(total_rows_after_table + 10)].alignment = Alignment(
+    horizontal='center')
+
+ws['B' + str(total_rows_after_table + 13)].value = "Member N. Name"
+ws['B' + str(total_rows_after_table + 13)].alignment = Alignment(
+    horizontal='center')
+ws['B' + str(total_rows_after_table + 13)].font = Font(
+    bold=True)
+ws['B' + str(total_rows_after_table + 14)].value = "Member"
+ws['B' + str(total_rows_after_table + 14)].alignment = Alignment(
+    horizontal='center')
+ws['F' + str(total_rows_after_table + 13)].value = "Member N. Name"
+ws['F' + str(total_rows_after_table + 13)].alignment = Alignment(
+    horizontal='center')
+ws['F' + str(total_rows_after_table + 13)].font = Font(
+    bold=True)
+ws['F' + str(total_rows_after_table + 14)].value = "Member"
+ws['F' + str(total_rows_after_table + 14)].alignment = Alignment(
+    horizontal='center')
+
+#Co-chair
+ws['A' + str(total_rows_after_table + 16)].value = "Co-chair N. Name"
+ws['A' + str(total_rows_after_table + 16)].alignment = Alignment(
+    horizontal='center')
+ws['A' + str(total_rows_after_table + 16)].font = Font(
+    bold=True)
+range_min = 'A' + str(total_rows_after_table + 16)
+range_max = 'F' + str(total_rows_after_table + 16)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+ws['A' + str(total_rows_after_table + 17)].value = "Co-Chairman"
+ws['A' + str(total_rows_after_table + 17)].alignment = Alignment(
+    horizontal='center')
+range_min = 'A' + str(total_rows_after_table + 17)
+range_max = 'F' + str(total_rows_after_table + 17)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+#Chairperson
+ws['A' + str(total_rows_after_table + 19)].value = "Chairperson N. Name"
+ws['A' + str(total_rows_after_table + 19)].alignment = Alignment(
+    horizontal='center')
+ws['A' + str(total_rows_after_table + 19)].font = Font(
+    bold=True)
+range_min = 'A' + str(total_rows_after_table + 19)
+range_max = 'F' + str(total_rows_after_table + 19)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+ws['A' + str(total_rows_after_table + 20)].value = "Chairperson"
+ws['A' + str(total_rows_after_table + 20)].alignment = Alignment(
+    horizontal='center')
+range_min = 'A' + str(total_rows_after_table + 20)
+range_max = 'F' + str(total_rows_after_table + 20)
 ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
 
