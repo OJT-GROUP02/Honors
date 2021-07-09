@@ -371,7 +371,8 @@ table_total_rows = min_row_m + max_row_f
 for table_total_row in range (min_row_m, table_total_rows):
         ws['B' + str(table_total_row)].alignment = Alignment(horizontal='left')
 
-total_rows_after_table = minimum_row + min_row_m + f_total_rows + 3
+#Contents below the table
+total_rows_after_table = minimum_row + m_total_rows + f_total_rows + 5
 
 rows = ws.iter_cols(min_row=19, min_col=1,
                     max_row=minimum_row + m_total_rows + f_total_rows + 3,
