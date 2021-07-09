@@ -83,11 +83,8 @@ def rank():
 
 # db connection
 def connect(query):
-    # cur = psycopg2.connect(database='honorsdb', user='postgres',
-    #                        password='postgres', host='localhost',
-    #                         port="5432").cursor()
     cur = psycopg2.connect(database='honorsdb', user='postgres',
-                           password='postgres', host='localhost',
+                           password='1612', host='localhost',
                             port="5432").cursor()
     cur.execute(query)
     desc = cur.description
@@ -402,11 +399,12 @@ range_min = 'A' + str(total_rows_after_table + 3)
 range_max = 'F' + str(total_rows_after_table + 3)
 ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
-ws.append(['grades and other important documents of the respective honor graduates for comments, recommendation '])
+ws['A' + str(total_rows_after_table + 4)].value = "grades and other important documents of the respective" \
+                                                    "honor graduates for comments, recommendation"
 range_min = 'A' + str(total_rows_after_table + 4)
 range_max = 'F' + str(total_rows_after_table + 4)
 ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
-ws.append(['and approval.'])
+ws['A' + str(total_rows_after_table + 5)].value = " and approval."
 range_min = 'A' + str(total_rows_after_table + 5)
 range_max = 'F' + str(total_rows_after_table + 5)
 ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
@@ -492,14 +490,8 @@ ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 #RANK SHEET ---------------------------------------------
 # palitan na lang ang arguments
 
-#esh
-# cur = psycopg2.connect(database='sirDB', user='postgres',
-#                         password='1201', host='localhost',
-#                         port="5432").cursor()
-
-#maedel
 cur = psycopg2.connect(database='honorsdb', user='postgres',
-                        password='postgres', host='localhost',
+                        password='1612', host='localhost',
                         port="5432").cursor()
 
 ws = wb["Rank"]
