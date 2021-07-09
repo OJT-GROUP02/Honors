@@ -84,8 +84,8 @@ def rank():
 
 # db connection
 def connect(query):
-    cur = psycopg2.connect(database='honors', user='postgres',
-                           password='april17', host='localhost',
+    cur = psycopg2.connect(database='honorsdb', user='postgres',
+                           password='postgres', host='localhost',
                             port="5432").cursor()
     # cur = psycopg2.connect(database='honorsdb', user='postgres',
     #                        password='1612', host='localhost',
@@ -114,8 +114,7 @@ header_query = "SELECT header.header_id, college.college_name, " \
                "college.college_address, header.semester, " \
                "header.academic_year FROM header LEFT JOIN college on " \
                "college.college_id = header.college_id WHERE " \
-               "college.college_name = 'College of Business, Economics, " \
-               "and Management' \
+               "college.college_name = 'College of Arts and Letters' \
                AND header.semester = '2nd Semester' AND " \
                "academic_year = '2019-2020'"
 
@@ -402,7 +401,244 @@ range_max = 'F' + str(total_rows_after_table + 1)
 ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
-# wb.save('static/Honors.xlsx')
+
+#RANK SHEET
+ws = wb["Rank"]
+ColumnDimension(ws, auto_size=True)
+ws.page_setup.paperHeight = '13in'
+ws.page_setup.paperWidth = '8.5in'
+
+# Heading
+ws.append(['Republic of the Philippines'])
+ws.merge_cells('A1:H1')
+ws.append(['Bicol University'])
+ws.merge_cells('A2:H2')
+ws.append([college_name_upper])
+ws.merge_cells('A3:H3')
+ws['A3'].font = Font(bold=True)
+ws.append([college_address])
+ws.merge_cells('A4:H4')
+
+for row in ws.iter_rows():
+    for cell in row:
+        cell.alignment = Alignment(
+            wrap_text=True, horizontal='center', vertical='center')
+
+# rows = range(1, 8)
+# columns = range(1, 5)
+# for row in rows:
+#     for col in columns:
+#         ws.cell(row, col).alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+
+# Date
+date = str(datetime.datetime.today().strftime('%B %d, %Y'))
+date_today = ws['H5']
+date_today.value = date
+date_today.alignment = Alignment(horizontal='right')
+
+
+# Inside Address
+ws['A7'].value = "THE BICOL UNIVERSITY REGISTRAR"
+ws['A8'].value = "Bicol University"
+ws['A9'].value = "Legazpi City"
+
+for row in ws['A7':'H9']:
+    for cell in row:
+        cell.alignment = Alignment(horizontal='left')
+        
+#Attention   
+for col in range(1, 7):
+    ws.column_dimensions[get_column_letter(col)].bestFit=True
+
+ws['A12'].value = "Attn: UNIVERITY EVALUATION/REVIEW COMMITTEE ON HONOR AND GRADUATES"
+ws.merge_cells('A12:H12')
+ws['A12'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+
+#Greetings
+ws['A15'].value = "Sir/Madam:"
+ws['A15'].alignment = Alignment(horizontal='left')
+
+#Letter Body
+
+for row in range (16, 18):
+   ws.row_dimensions[(row)].bestFit=True
+   
+ws['A16'].value = "Herewith are the Official List of Candidates for Graduation with Honors under the different degree programs"
+ws['A16'].alignment = Alignment(horizontal='left', indent=1)
+ws.merge_cells('A16:H16')
+
+ws['A17'].value = f" of the {college_name}  for the {college_semester}, {academic_year} "
+ws['A17'].alignment = Alignment(horizontal='left')
+ws.merge_cells('A17:H17')
+
+#table
+thin = Side(border_style="thin", color="000000")# border style, color 
+border = Border(left=thin, right=thin, top=thin, bottom=thin)# the position of the border 
+
+rows = ws.iter_cols(min_row=19, min_col=1, max_row=77, max_col=8)
+
+for row in rows:
+    for cell in row:
+        cell.border = border
+
+rows = ws.iter_cols(min_row=19, min_col=1, max_row=77, max_col=8)
+
+for row in rows:
+    for cell in row:
+        cell.alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+
+ws['A19'].value = "NO"
+ws.merge_cells(start_row=19, start_column=1, end_row=20, end_column=1)
+ws['B19'].value = "NAME"
+ws.merge_cells(start_row=19, start_column=2, end_row=20, end_column=2)
+ws['C19'].value = "CLASSIFICATION"
+ws.merge_cells(start_row=19, start_column=3, end_row=19, end_column=4)
+ws['C20'].value = "Regular"
+ws['D20'].value = "Irregular"
+ws['E19'].value = "RATING"
+ws.merge_cells(start_row=19, start_column=5, end_row=19, end_column=7)
+ws['E20'].value = "Total Units"
+ws['F20'].value = "Sum of Grades"
+ws['G20'].value = "Final GWA"
+ws['H19'].value = "AWARDS"
+ws.merge_cells(start_row=19, start_column=8, end_row=20, end_column=8)
+
+#Committee
+ws['A79'].value = "EVALUATION COMMITTEE:"
+ws.merge_cells('A79:B79')
+ws['A79'].font = Font(bold=True)
+
+ws['B81'].value = '_________________________'
+ws.merge_cells('B81:C81')
+ws['B82'].value = "Committee"
+ws['B82'].font = Font(bold=True)
+ws['B82'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws.merge_cells('B82:C82')
+ws['B83'].value = "Position"
+ws['B83'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws.merge_cells('B83:C83')
+
+ws['F81'].value = '_________________________'
+ws.merge_cells('F81:G81')
+ws['F82'].value = "Committee"
+ws['F82'].font = Font(bold=True)
+ws['F82'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws.merge_cells('F82:G82')
+ws['F83'].value = "Position"
+ws['F83'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws.merge_cells('F83:G83')
+
+ws['B86'].value = '_________________________'
+ws.merge_cells('B86:C86')
+ws['B87'].value = "Committee"
+ws['B87'].font = Font(bold=True)
+ws['B87'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws.merge_cells('B87:C87')
+ws['B88'].value = "Position"
+ws['B88'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws.merge_cells('B88:C88')
+
+ws['F86'].value = '_________________________'
+ws.merge_cells('F86:G86')
+ws['F87'].value = "Committee"
+ws['F87'].font = Font(bold=True)
+ws['F87'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws.merge_cells('F87:G87')
+ws['F88'].value = "Position"
+ws['F88'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws.merge_cells('F88:G88')
+
+ws['C91'].value = "Note:"
+ws['F88'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+
+ws['D92'].value = '_________________________'
+ws.merge_cells('D92:E92')
+ws['D93'].value = "Committee"
+ws['D93'].font = Font(bold=True)
+ws['D93'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws.merge_cells('D93:E93')
+ws['D94'].value = "Position"
+ws['D94'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws.merge_cells('D94:E94')
+
+#Note
+ws['B104'].value = "Note: Subject for verification/recommendation/approval by the University Evaluation/Review Committee"
+ws['B104'].alignment = Alignment(horizontal='left', indent=1)
+ws.merge_cells('B104:H104')
+
+ws['B105'].value = "on Honor Graduates"
+ws['B105'].alignment = Alignment(horizontal='left', indent=1)
+ws.merge_cells('B105:C105')
+
+ws['B107'].value = "Attached are the individual collegiate student's permanent record with the individual computation of grades"
+ws['B107'].alignment = Alignment(horizontal='left', indent=1)
+ws.merge_cells('B107:H107')
+
+ws['A108'].value = "and other important documents of the respective honor graduates for comments, recommendations and approval"
+ws['A108'].alignment = Alignment(horizontal='left', indent=1)
+ws.merge_cells('A108:H108')
+
+ws['B111'].value = "COLLEGE/CAMPUS EVALUATION/REVIEW COMMITTEE"
+ws.merge_cells('B111:G111')
+ws['B111'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws['B111'].font = Font(bold=True)
+
+ws['A113'].value = '_________________________'
+ws.merge_cells('A113:B113')
+ws['A114'].value = "Member"
+ws['A114'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws.merge_cells('A114:B114')
+
+ws['C113'].value = '_________________________'
+ws.merge_cells('C113:D113')
+ws['C114'].value = "Member"
+ws['C114'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws.merge_cells('C114:D114')
+
+ws['E113'].value = '_________________________'
+ws.merge_cells('E113:F113')
+ws['E114'].value = "Member"
+ws['E114'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws.merge_cells('E114:F114')
+
+ws['G113'].value = '_________________________'
+ws.merge_cells('G113:H113')
+ws['G114'].value = "Member"
+ws['G114'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws.merge_cells('G114:H114')
+
+ws['D117'].value = '_________________________'
+ws.merge_cells('D117:E117')
+ws['D118'].value = "Co-Chairman"
+ws['D118'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws.merge_cells('D118:E118')
+
+ws['D120'].value = '_________________________'
+ws.merge_cells('D120:E120')
+ws['D121'].value = "Co-Chairman"
+ws['D121'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws.merge_cells('D121:E121')
+
+
+#table
+thin = Side(border_style="thin", color="000000")# border style, color 
+border = Border(left=thin, right=thin, top=thin, bottom=thin)# the position of the border 
+
+rows = ws.iter_cols(min_row=126, min_col=1, max_row=153, max_col=8)
+
+for row in rows:
+    for cell in row:
+        cell.border = border
+
+rows = ws.iter_cols(min_row=126, min_col=1, max_row=153, max_col=8)
+
+for row in rows:
+    for cell in row:
+        cell.alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+
+
+
+wb.save('static/Honors.xlsx')
 # ivee
-wb.save('D:\\Users\\iveej\\Desktop\\web2py\\applications\\honors\\static'
-        '\\Honors.xlsx')
+#wb.save('D:\\Users\\iveej\\Desktop\\web2py\\applications\\honors\\static'
+#        '\\Honors.xlsx')
