@@ -486,8 +486,15 @@ ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
 #RANK SHEET ---------------------------------------------
 # palitan na lang ang arguments
-cur = psycopg2.connect(database='sirDB', user='postgres',
-                        password='1201', host='localhost',
+
+#esh
+# cur = psycopg2.connect(database='sirDB', user='postgres',
+#                         password='1201', host='localhost',
+#                         port="5432").cursor()
+
+#maedel
+cur = psycopg2.connect(database='honorsdb', user='postgres',
+                        password='1612', host='localhost',
                         port="5432").cursor()
 
 ws = wb["Rank"]
@@ -567,11 +574,6 @@ rows = ws.iter_cols(min_row=19, min_col=1, max_row=77, max_col=8)
 for row in rows:
     for cell in row:
         cell.border = border
-
-rows = ws.iter_cols(min_row=19, min_col=1, max_row=77, max_col=8)
-
-for row in rows:
-    for cell in row:
         cell.alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 
 ws['A19'].value = "NO"
@@ -815,11 +817,6 @@ rows = ws.iter_cols(min_row=126, min_col=1, max_row=153, max_col=8)
 for row in rows:
     for cell in row:
         cell.border = border
-
-rows = ws.iter_cols(min_row=126, min_col=1, max_row=153, max_col=8)
-
-for row in rows:
-    for cell in row:
         cell.alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
 
 
