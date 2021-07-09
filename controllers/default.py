@@ -369,6 +369,11 @@ for f_student in f_students:
     temp_row += 1
     count += 1
 
+#left align table data
+table_total_rows = min_row_m + f_total_rows
+for table_total_row in range (min_row_m, table_total_rows):
+        ws['B' + str(table_total_row)].alignment = Alignment(horizontal='left')
+
 total_rows_after_table = minimum_row + min_row_m + f_total_rows + 3
 
 rows = ws.iter_cols(min_row=19, min_col=1,
