@@ -635,17 +635,16 @@ table_1_num = 0
 total_stud_num = len(student_list)
 for i in range(0, len(student_list)):
     if student_list[i][5] != None:
-        table_1_num += 1
+        table_1_num += 1                                         # total rows ng table 1
 
-table_2_num = total_stud_num - table_1_num
+start_table_1_num_row = 21                                       # row start ng table 1
+end_table_1_num_row = table_1_num + start_table_1_num_row        # row end ng table 1
 
-table_1_num_row = 21
-# ----------- Table 1 ---------
 for i in range(0,table_1_num + 1):
 
     # Grade items
     grade_units = grade_list[i][2]
-    grade_id = grade_list[i][5]         # award id
+    grade_id = grade_list[i][5]         
     grade_sum = grade_list[i][3]
     grade_gwa = grade_list[i][4]
 
@@ -668,29 +667,32 @@ for i in range(0,table_1_num + 1):
             for j in range(1, len(reg_list) + 1):
                 char = get_column_letter(j)
                 if reg_list[j - 1] == grade_gwa:
-                    ws[char + str(table_1_num_row)].value = reg_list[j - 1]
-                    ws[char + str(table_1_num_row)].font = \
+                    ws[char + str(start_table_1_num_row)].value = reg_list[j - 1]
+                    ws[char + str(start_table_1_num_row)].font = \
                         Font(color="9d0008", name='Calibri', size=9, bold=True)
-                    ws[char + str(table_1_num_row)].fill = \
+                    ws[char + str(start_table_1_num_row)].fill = \
                         PatternFill(fill_type='solid', fgColor="fbc3cb")
                 else:
-                    ws[char + str(table_1_num_row)].value = reg_list[j - 1]
+                    ws[char + str(start_table_1_num_row)].value = reg_list[j - 1]
 
         if stud_classification == 'Irregular':
             for j in range(1, len(irreg_list) + 1):
                 char = get_column_letter(j)
                 if irreg_list[j - 1] == grade_gwa:
-                    ws[char + str(table_1_num_row)].value = irreg_list[j - 1]
-                    ws[char + str(table_1_num_row)].font = \
+                    ws[char + str(start_table_1_num_row)].value = irreg_list[j - 1]
+                    ws[char + str(start_table_1_num_row)].font = \
                         Font(color="9d0008", name='Calibri', size=9, bold=True)
-                    ws[char + str(table_1_num_row)].fill = \
+                    ws[char + str(start_table_1_num_row)].fill = \
                         PatternFill(fill_type='solid', fgColor="fbc3cb")
                 else:
-                    ws[char + str(table_1_num_row)].value = irreg_list[j - 1]
+                    ws[char + str(start_table_1_num_row)].value = irreg_list[j - 1]
         
-        table_1_num_row += 1
+        start_table_1_num_row += 1
 
 # ----------------------- END OF TABLE 1 -----------------------
+start_row_committee = end_table_1_num_row + 3
+# start_row_committee                                                   -> row(81) start para sa data ng committee
+# ws['A' + str(start_row_committee)].value = "EVALUATION COMMITTEE:"    -> example use
         
 #Committee
 ws['A79'].value = "EVALUATION COMMITTEE:"
@@ -839,9 +841,10 @@ for row in rows:
 
 
 # ----------------------- TABLE 2 -----------------------
-table_2_num_row = 126
+start_table_2_num_row = 126                         # row start for table 2 (Adjust na lang if needed)
 honor_stud = []
 other_stud = []
+
 # Sorting of student according to honor roles
 for i in range(0, len(student_list)):
     if student_list[i][5] != None:
@@ -849,7 +852,7 @@ for i in range(0, len(student_list)):
     else:
         other_stud.append(student_list[i])
     
-i = 57
+i = 57  
 j = 1
 ws['H141'].fill = \
             PatternFill(fill_type='solid', fgColor="f0e68c")
@@ -861,7 +864,7 @@ for stud in other_stud:
                 
     # Grade items
     grade_units = grade_list[i][2]
-    grade_id = grade_list[i][5]         # award id
+    grade_id = grade_list[i][5]         
     grade_sum = grade_list[i][3]
     grade_gwa = grade_list[i][4]
 
@@ -872,34 +875,29 @@ for stud in other_stud:
         if grade_units == 234:
             for k in range(1, len(none_list) + 1):
                 char = get_column_letter(k)
-                ws[char + str(table_2_num_row)].value = none_list[k - 1]
-                ws[char + str(table_2_num_row)].font = \
-                        Font(name='Calibri', size=9)
+                ws[char + str(start_table_2_num_row)].value = none_list[k - 1]
             i += 1  
-            table_2_num_row += 1 
+            start_table_2_num_row += 1 
             
-
         # yellow 
         else:
             if grade_units != None:
                 for k in range(1, len(none_list) + 1):
                     char = get_column_letter(k)
-                    ws[char + str(table_2_num_row)].value = none_list[k - 1]
-                    ws[char + str(table_2_num_row)].font = \
+                    ws[char + str(start_table_2_num_row)].value = none_list[k - 1]
+                    ws[char + str(start_table_2_num_row)].font = \
                         Font(color="9d0008", name='Calibri', size=9, bold=True)
-                    ws[char + str(table_2_num_row)].fill = \
+                    ws[char + str(start_table_2_num_row)].fill = \
                         PatternFill(fill_type='solid', fgColor="f0e68c")
                     if k == 7:
-                        ws[char + str(table_2_num_row)].fill = \
+                        ws[char + str(start_table_2_num_row)].fill = \
                         PatternFill(fill_type='solid', fgColor="fbc3cb") 
             else:
                 for k in range(1, len(none_list) + 1):
                     char = get_column_letter(k)
-                    ws[char + str(table_2_num_row)].value = none_list[k - 1]
-                    ws[char + str(table_2_num_row)].font = \
-                        Font(name='Calibri', size=9)
+                    ws[char + str(start_table_2_num_row)].value = none_list[k - 1]
             i += 1  
-            table_2_num_row += 1 
+            start_table_2_num_row += 1 
          
     if j == 4:
         for stud in other_stud:
@@ -912,11 +910,9 @@ for stud in other_stud:
                     char = get_column_letter(k)
                     none_tuple = (str(i + 1), stud_name, '','', grade_units, grade_sum, grade_gwa)
                     none_list = list(none_tuple)
-                    ws[char + str(table_2_num_row)].value = none_list[k - 1]
-                    ws[char + str(table_2_num_row)].font = \
-                        Font(name='Calibri', size=9)  
+                    ws[char + str(start_table_2_num_row)].value = none_list[k - 1]  
         i += 1
-        table_2_num_row += 1
+        start_table_2_num_row += 1
     j += 1
     
 
