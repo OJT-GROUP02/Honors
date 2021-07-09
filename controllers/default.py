@@ -655,8 +655,8 @@ for i in range(0,table_1_num + 1):
         award_id = award_list[grade_id - 1][0]
         award_title = award_list[grade_id - 1][1]
 
-        reg_tuple = (str(i) + '.', stud_name, '✔','', grade_units, grade_sum, grade_gwa, award_title)
-        irreg_tuple = (str(i) + '.', stud_name, '','✔', grade_units, grade_sum, grade_gwa, award_title)
+        reg_tuple = (str(i), stud_name, '✔','', grade_units, grade_sum, grade_gwa, award_title)
+        irreg_tuple = (str(i), stud_name, '','✔', grade_units, grade_sum, grade_gwa, award_title)
 
         reg_list = list(reg_tuple)
         irreg_list = list(irreg_tuple)
@@ -824,7 +824,7 @@ for row in rows:
 
 
 # ----------------------- TABLE 2 -----------------------
-table_2_num_row = 125
+table_2_num_row = 126
 honor_stud = []
 other_stud = []
 # Sorting of student according to honor roles
@@ -836,6 +836,8 @@ for i in range(0, len(student_list)):
     
 i = 57
 j = 1
+ws['H141'].fill = \
+            PatternFill(fill_type='solid', fgColor="f0e68c")
 for stud in other_stud:
 
     # Student items
@@ -848,7 +850,7 @@ for stud in other_stud:
     grade_sum = grade_list[i][3]
     grade_gwa = grade_list[i][4]
 
-    none_tuple = (str(i + 1) + '.', stud_name, '','', grade_units, grade_sum, grade_gwa)
+    none_tuple = (str(i + 1), stud_name, '','', grade_units, grade_sum, grade_gwa)
     none_list = list(none_tuple)
 
     if stud[2] != 'Jhon Christian':
@@ -856,8 +858,10 @@ for stud in other_stud:
             for k in range(1, len(none_list) + 1):
                 char = get_column_letter(k)
                 ws[char + str(table_2_num_row)].value = none_list[k - 1]
-            i += 1   
+            i += 1  
+            table_2_num_row += 1 
             
+
         # yellow 
         else:
             if grade_units != None:
@@ -875,9 +879,10 @@ for stud in other_stud:
                 for k in range(1, len(none_list) + 1):
                     char = get_column_letter(k)
                     ws[char + str(table_2_num_row)].value = none_list[k - 1]
-            i += 1   
+            i += 1  
+            table_2_num_row += 1 
          
-    if i == 61:
+    if j == 4:
         for stud in other_stud:
             if stud[2] == 'Jhon Christian':
                 stud_name = stud[2] + ' ' + stud[3] + ' ' + stud[1]
@@ -886,11 +891,13 @@ for stud in other_stud:
                 grade_gwa = grade_list[0][4]
                 for k in range(1, len(none_list) + 1):
                     char = get_column_letter(k)
-                    none_tuple = (str(i) + '.', stud_name, '','', grade_units, grade_sum, grade_gwa)
+                    none_tuple = (str(i + 1), stud_name, '','', grade_units, grade_sum, grade_gwa)
                     none_list = list(none_tuple)
                     ws[char + str(table_2_num_row)].value = none_list[k - 1]  
         i += 1
-    table_2_num_row += 1
+        table_2_num_row += 1
+    j += 1
+    
 
 # ----------------------- END OF TABLE 2 -----------------------
 
