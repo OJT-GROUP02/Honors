@@ -10,7 +10,7 @@ from openpyxl.styles import Font, Alignment, fills, numbers, PatternFill, Border
 from openpyxl.worksheet.dimensions import ColumnDimension
 from openpyxl.descriptors.excel import UniversalMeasure, Relation
 from openpyxl.worksheet.table import Table, TableStyleInfo
-from openpyxl.worksheet.pagebreak import Break
+from openpyxl.utils.cell import coordinate_from_string, column_index_from_string
 
 
 def index():
@@ -691,158 +691,198 @@ for i in range(0,table_1_num + 1):
         start_table_1_num_row += 1
 
 # ----------------------- END OF TABLE 1 -----------------------
-start_row_committee = end_table_1_num_row + 3
+start_row_committee = end_table_1_num_row + 1
 # start_row_committee                                                   -> row(81) start para sa data ng committee
 # ws['A' + str(start_row_committee)].value = "EVALUATION COMMITTEE:"    -> example use
         
 #Committee
-ws['A79'].value = "EVALUATION COMMITTEE:"
-ws.merge_cells('A79:B79')
-ws['A79'].font = Font(bold=True)
+ws['A' + str(start_row_committee)].value = "EVALUATION COMMITTEE:"
+ws['A' + str(start_row_committee)].font = Font(bold=True)
+range_min = 'A' + str(start_row_committee)
+range_max = 'F' + str(start_row_committee)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
-ws['B81'].value = '_________________________'
-ws['B81'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('B81:C81')
-ws['B82'].value = "Committee"
-ws['B82'].font = Font(bold=True)
-ws['B82'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('B82:C82')
-ws['B83'].value = "Position"
-ws['B83'].font = Font(size=11)
-ws['B83'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('B83:C83')
+ws['B' + str(start_row_committee + 2)].value = "_________________________"
+ws['B' + str(start_row_committee + 2)].font = Font(bold=True)
+ws['B' + str(start_row_committee + 2)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+range_min = 'B' + str(start_row_committee + 2)
+range_max = 'C' + str(start_row_committee + 2)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
-ws['F81'].value = '_________________________'
-ws.merge_cells('F81:G81')
-ws['F82'].value = "Committee"
-ws['F82'].font = Font(bold=True)
-ws['F82'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('F82:G82')
-ws['F83'].value = "Position"
-ws['F83'].font = Font(size=11)
-ws['F83'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('F83:G83')
+ws['B' + str(start_row_committee + 3)].value = "Committee"
+ws['B' + str(start_row_committee + 3)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+range_min = 'B' + str(start_row_committee + 3)
+range_max = 'C' + str(start_row_committee + 3)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
-ws['B86'].value = '_________________________'
-ws['B86'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('B86:C86')
-ws['B87'].value = "Committee"
-ws['B87'].font = Font(bold=True)
-ws['B87'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('B87:C87')
-ws['B88'].value = "Position"
-ws['B88'].font = Font(size=11)
-ws['B88'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('B88:C88')
+ws['F' + str(start_row_committee + 2)].value = '_________________________'
+ws['F' + str(start_row_committee + 2)].font = Font(bold=True)
+range_min = 'F' + str(start_row_committee + 2)
+range_max = 'G' + str(start_row_committee + 2)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
-ws['F86'].value = '_________________________'
-ws.merge_cells('F86:G86')
-ws['F87'].value = "Committee"
-ws['F87'].font = Font(bold=True)
-ws['F87'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('F87:G87')
-ws['F88'].value = "Position"
-ws['F88'].font = Font(size=11)
-ws['F88'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('F88:G88')
+ws['F' + str(start_row_committee + 3)].value = "Committee"
+ws['F' + str(start_row_committee + 3)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+range_min = 'F' + str(start_row_committee + 3)
+range_max = 'G' + str(start_row_committee + 3)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
-ws['C91'].value = "Note:"
-ws['C91'].font = Font(size=11)
-ws['F88'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws['B' + str(start_row_committee + 7)].value = '_________________________'
+ws['B' + str(start_row_committee + 7)].font = Font(bold=True)
+ws['B' + str(start_row_committee + 7)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+range_min = 'B' + str(start_row_committee + 7)
+range_max = 'C' + str(start_row_committee + 7)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+ws['F' + str(start_row_committee + 7)].value = '_________________________'
+ws['F' + str(start_row_committee + 2)].font = Font(bold=True)
+range_min = 'F' + str(start_row_committee + 7)
+range_max = 'G' + str(start_row_committee + 7)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
-ws['D92'].value = '_________________________'
-ws['D92'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('D92:E92')
-ws['D93'].value = "Committee"
-ws['D93'].font = Font(bold=True)
-ws['D93'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('D93:E93')
-ws['D94'].value = "Position"
-ws['D94'].font = Font(size=11)
-ws['D94'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('D94:E94')
+ws['B' + str(start_row_committee + 8)].value = "Committee"
+ws['B' + str(start_row_committee + 8)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+range_min = 'B' + str(start_row_committee + 8)
+range_max = 'C' + str(start_row_committee + 8)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+ws['F' + str(start_row_committee + 8)].value = "Committee"
+ws['F' + str(start_row_committee + 8)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+range_min = 'F' + str(start_row_committee + 8)
+range_max = 'G' + str(start_row_committee + 8)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
-#Note
-ws['B104'].value = "Note: Subject for verification/recommendation/approval by the University Evaluation/Review Committee"
-ws['B104'].alignment = Alignment(horizontal='left', indent=1)
-ws.merge_cells('B104:H104')
-ws['B104'].font = Font(size=11)
+ws['C' + str(start_row_committee + 13)].value = "Noted:"
+ws['C' + str(start_row_committee + 13)].font = Font(size=11)
 
-ws['B105'].value = "on Honor Graduates"
-ws['B105'].alignment = Alignment(horizontal='left', indent=1)
-ws['B105'].font = Font(size=11)
-ws.merge_cells('B105:C105')
+ws['D' + str(start_row_committee + 13)].value = '_________________________'
+ws['D' + str(start_row_committee + 13)].font = Font(bold=True)
+ws['D' + str(start_row_committee + 13)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+range_min = 'D' + str(start_row_committee + 13)
+range_max = 'F' + str(start_row_committee + 13)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
-ws['B107'].value = "Attached are the individual collegiate student's permanent record with the individual computation of grades"
-ws['B107'].font = Font(size=11)
-ws['B107'].alignment = Alignment(horizontal='left', indent=1)
-ws.merge_cells('B107:H107')
-
-ws['A108'].value = "and other important documents of the respective honor graduates for comments, recommendations and approval"
-ws['A108'].alignment = Alignment(horizontal='left', indent=1)
-ws['A108'].font = Font(size=11)
-ws.merge_cells('A108:H108')
-
-ws['A111'].value = "COLLEGE/CAMPUS EVALUATION/REVIEW COMMITTEE"
-ws.merge_cells('A111:H111')
-ws['A111'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws['A111'].font = Font(bold=True)
-
-ws['A113'].value = '_________________________'
-ws['A113'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('A113:B113')
-ws['A114'].value = "Member"
-ws['A114'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('A114:B114')
-
-ws['C113'].value = '_________________________'
-ws['C113'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('C113:D113')
-ws['C114'].value = "Member"
-ws['C114'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('C114:D114')
-
-ws['E113'].value = '_________________________'
-ws['E113'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('E113:F113')
-ws['E114'].value = "Member"
-ws['E114'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('E114:F114')
-
-ws['G113'].value = '_________________________'
-ws['G113'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('G113:H113')
-ws['G114'].value = "Member"
-ws['G114'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('G114:H114')
-
-ws['D117'].value = '_________________________'
-ws.merge_cells('D117:E117')
-ws['D118'].value = "Co-Chairman"
-ws['D118'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('D118:E118')
-
-ws['D120'].value = '_________________________'
-ws.merge_cells('D120:E120')
-ws['D121'].value = "Co-Chairman"
-ws['D121'].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
-ws.merge_cells('D121:E121')
+ws['D' + str(start_row_committee + 14)].value = "Position"
+ws['D' + str(start_row_committee + 14)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+range_min = 'D' + str(start_row_committee + 14)
+range_max = 'F' + str(start_row_committee + 14)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
 
-#table
-thin = Side(border_style="thin", color="000000")# border style, color 
-border = Border(left=thin, right=thin, top=thin, bottom=thin)# the position of the border 
+# #Note
+ws['B' + str(start_row_committee + 25)].value = "Note: Subject for verification/recommendation/approval by the University Evaluation/Review Committee"
+ws['B' + str(start_row_committee + 25)].alignment = Alignment(horizontal='left', indent=1, wrapText=True)
+range_min = 'B' + str(start_row_committee + 25)
+range_max = 'H' + str(start_row_committee + 25)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
-rows = ws.iter_cols(min_row=126, min_col=1, max_row=153, max_col=8)
+ws['B' + str(start_row_committee + 26)].value = "on Honor Graduates"
+ws['B' + str(start_row_committee + 26)].alignment = Alignment(horizontal='left', indent=1, wrapText=True)
+range_min = 'B' + str(start_row_committee + 26)
+range_max = 'C' + str(start_row_committee + 26)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
-for row in rows:
-    for cell in row:
-        cell.border = border
-        cell.alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws['A' + str(start_row_committee + 28)].value = "Attached are the individual collegiate student's permanent record with the individual computation of grades"
+ws['A' + str(start_row_committee + 28)].alignment = Alignment(horizontal='left', indent=1, wrapText=True)
+range_min = 'A' + str(start_row_committee + 28)
+range_max = 'H' + str(start_row_committee + 28)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
+ws['A' + str(start_row_committee + 29)].value = "and other important documents of the respective honor graduates for comments, recommendations"
+ws['A' + str(start_row_committee + 29)].alignment = Alignment(horizontal='left', wrapText=True)
+ws['A' + str(start_row_committee + 29)].font = Font(size=9)
+range_min = 'A' + str(start_row_committee + 29)
+range_max = 'H' + str(start_row_committee + 29)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+ws['A' + str(start_row_committee + 30)].value = "and approval"
+ws['A' + str(start_row_committee + 30)].alignment = Alignment(horizontal='left', wrapText=True)
+ws['A' + str(start_row_committee + 30)].font = Font(size=9)
+range_min = 'A' + str(start_row_committee + 30)
+range_max = 'H' + str(start_row_committee + 30)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+ws['A' + str(start_row_committee + 35)].value = "COLLEGE/CAMPUS EVALUATION/REVIEW COMMITTEE"
+ws['A' + str(start_row_committee + 35)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws['A' + str(start_row_committee + 35)].font = Font(bold=True)
+range_min = 'A' + str(start_row_committee + 35)
+range_max = 'H' + str(start_row_committee + 35)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+ws['A' + str(start_row_committee + 37)].value = '_________________________'
+ws['A' + str(start_row_committee + 37)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws['A' + str(start_row_committee + 37)].font = Font(bold=True)
+range_min = 'A' + str(start_row_committee + 37)
+range_max = 'B' + str(start_row_committee + 37)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+ws['A' + str(start_row_committee + 38)].value = 'Member'
+ws['A' + str(start_row_committee + 38)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+range_min = 'A' + str(start_row_committee + 38)
+range_max = 'B' + str(start_row_committee + 38)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+ws['C' + str(start_row_committee + 37)].value = '_________________________'
+ws['C' + str(start_row_committee + 37)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws['C' + str(start_row_committee + 37)].font = Font(bold=True)
+range_min = 'C' + str(start_row_committee + 37)
+range_max = 'D' + str(start_row_committee + 37)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+ws['C' + str(start_row_committee + 38)].value = 'Member'
+ws['C' + str(start_row_committee + 38)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+range_min = 'C' + str(start_row_committee + 38)
+range_max = 'D' + str(start_row_committee + 38)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+ws['E' + str(start_row_committee + 37)].value = '_________________________'
+ws['E' + str(start_row_committee + 37)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws['E' + str(start_row_committee + 37)].font = Font(bold=True)
+range_min = 'E' + str(start_row_committee + 37)
+range_max = 'F' + str(start_row_committee + 37)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+ws['E' + str(start_row_committee + 38)].value = 'Member'
+ws['E' + str(start_row_committee + 38)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+range_min = 'E' + str(start_row_committee + 38)
+range_max = 'F' + str(start_row_committee + 38)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+ws['G' + str(start_row_committee + 37)].value = '_________________________'
+ws['G' + str(start_row_committee + 37)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws['G' + str(start_row_committee + 37)].font = Font(bold=True)
+range_min = 'G' + str(start_row_committee + 37)
+range_max = 'H' + str(start_row_committee + 37)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+ws['G' + str(start_row_committee + 38)].value = 'Member'
+ws['G' + str(start_row_committee + 38)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+range_min = 'G' + str(start_row_committee + 38)
+range_max = 'H' + str(start_row_committee + 38)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+ws['D' + str(start_row_committee + 41)].value = '_________________________'
+ws['D' + str(start_row_committee + 41)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws['D' + str(start_row_committee + 41)].font = Font(bold=True)
+range_min = 'D' + str(start_row_committee + 41)
+range_max = 'E' + str(start_row_committee + 41)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+ws['D' + str(start_row_committee + 42)].value = "Co-Chairman"
+ws['D' + str(start_row_committee + 42)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+range_min = 'D' + str(start_row_committee + 42)
+range_max = 'E' + str(start_row_committee + 42)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+ws['D' + str(start_row_committee + 44)].value = '_________________________'
+ws['D' + str(start_row_committee + 44)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+ws['D' + str(start_row_committee + 44)].font = Font(bold=True)
+range_min = 'D' + str(start_row_committee + 44)
+range_max = 'E' + str(start_row_committee + 44)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
+
+ws['D' + str(start_row_committee + 45)].value = "Chairperson"
+ws['D' + str(start_row_committee + 45)].alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+range_min = 'D' + str(start_row_committee + 45)
+range_max = 'E' + str(start_row_committee + 45)
+ws.merge_cells(f'{str(range_min)}:{str(range_max)}')
 
 # ----------------------- TABLE 2 -----------------------
-start_table_2_num_row = 126                         # row start for table 2 (Adjust na lang if needed)
 honor_stud = []
 other_stud = []
 
@@ -855,8 +895,24 @@ for i in range(0, len(student_list)):
     
 i = 57  
 j = 1
-ws['H141'].fill = \
-            PatternFill(fill_type='solid', fgColor="f0e68c")
+
+# setting the starting row for table 2
+table_xy = coordinate_from_string('A' + str(start_row_committee + 49)) # returns ('A',4)
+start_table_2_num_row = table_xy[1] #access index 1 which is the row num
+
+max_row_other_stud =  start_table_2_num_row + len(other_stud) - 1
+
+thin = Side(border_style="thin", color="000000")# border style, color 
+border = Border(left=thin, right=thin, top=thin, bottom=thin)# the position of the border 
+
+rows = ws.iter_cols(min_row=start_table_2_num_row, min_col=1, max_row=max_row_other_stud, max_col=8)
+for row in rows:
+    for cell in row:
+        cell.border = border
+        cell.alignment = Alignment(horizontal='center', vertical='center', wrapText=True)
+        cell.font = Font(size=9)
+
+# table 2 loop
 for stud in other_stud:
 
     # Student items
