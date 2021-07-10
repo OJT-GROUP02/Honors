@@ -107,14 +107,6 @@ header_query = "SELECT header.header_id, college.college_name, " \
                AND header.semester = '2nd Semester' AND " \
                "academic_year = '2019-2020'"
 
-# header_query = "SELECT header.header_id, college.college_name, " \
-#                "college.college_address, header.semester, " \
-#                "header.academic_year FROM header LEFT JOIN college on " \
-#                "college.college_id = header.college_id WHERE " \
-#                "college.college_name = 'College of Arts and Letters' \
-#                AND header.semester = '2nd Semester' AND " \
-#                "academic_year = '2019-2020'"
-
 header = connect(header_query)
 college_name = header[0]["college_name"]
 college_name_upper = header[0]["college_name"].upper()
