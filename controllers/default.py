@@ -310,7 +310,7 @@ for m_student in m_students:
     count += 1
 
 # female students
-min_row_f = minimum_row + min_row_m + 2
+min_row_f = minimum_row + m_total_rows + 4
 max_row_f = min_row_f + f_total_rows
 count = 1
 
@@ -497,7 +497,7 @@ ws.column_dimensions["A"].width = 5
 ws.column_dimensions["B"].width = 30
 ws.column_dimensions["C"].width = 7
 ws.column_dimensions["D"].width = 7
-ws.column_dimensions["E"].width = 7 
+ws.column_dimensions["E"].width = 7
 ws.column_dimensions["F"].width = 7
 ws.column_dimensions["G"].width = 7
 ws.column_dimensions["H"].width = 18
@@ -517,7 +517,7 @@ for row in ws.iter_rows():
     for cell in row:
         cell.alignment = Alignment(
             wrap_text=True, horizontal='center', vertical='center')
-        
+
 
 # Date
 date = str(datetime.datetime.today().strftime('%B %d, %Y'))
@@ -534,8 +534,8 @@ ws['A9'].value = "Legazpi City"
 for row in ws['A7':'H9']:
     for cell in row:
         cell.alignment = Alignment(horizontal='left')
-        
-#Attention   
+
+#Attention
 for col in range(1, 7):
     ws.column_dimensions[get_column_letter(col)].bestFit=True
 
@@ -551,7 +551,7 @@ ws['A15'].alignment = Alignment(horizontal='left')
 
 for row in range (16, 18):
    ws.row_dimensions[(row)].bestFit=True
-   
+
 ws['A16'].value = "Herewith are the Official List of Candidates for Graduation with Honors under the different degree programs"
 ws['A16'].alignment = Alignment(horizontal='left', indent=1)
 ws.merge_cells('A16:H16')
@@ -561,8 +561,8 @@ ws['A17'].alignment = Alignment(horizontal='left')
 ws.merge_cells('A17:H17')
 
 #table
-thin = Side(border_style="thin", color="000000")# border style, color 
-border = Border(left=thin, right=thin, top=thin, bottom=thin)# the position of the border 
+thin = Side(border_style="thin", color="000000")# border style, color
+border = Border(left=thin, right=thin, top=thin, bottom=thin)# the position of the border
 
 rows = ws.iter_cols(min_row=19, min_col=1, max_row=77, max_col=8)
 
@@ -614,7 +614,7 @@ cur.execute('SELECT * from grade')
 for grade in cur:
     grade_row = list(grade)
     grade_list.append(grade_row)
-            
+
 award_list = []
 cur.execute('SELECT * from awards')
 for award in cur:
@@ -623,7 +623,7 @@ for award in cur:
 
 student_list.sort()
 grade_list.sort()
-    
+
 table_1_num = 0
 total_stud_num = len(student_list)
 for i in range(0, len(student_list)):
@@ -637,7 +637,7 @@ for i in range(0,table_1_num + 1):
 
     # Grade items
     grade_units = grade_list[i][2]
-    grade_id = grade_list[i][5]         
+    grade_id = grade_list[i][5]
     grade_sum = grade_list[i][3]
     grade_gwa = grade_list[i][4]
 
@@ -679,14 +679,14 @@ for i in range(0,table_1_num + 1):
                         PatternFill(fill_type='solid', fgColor="fbc3cb")
                 else:
                     ws[char + str(start_table_1_num_row)].value = irreg_list[j - 1]
-        
+
         start_table_1_num_row += 1
 
 # ----------------------- END OF TABLE 1 -----------------------
 start_row_committee = end_table_1_num_row + 1
 # start_row_committee                                                   -> row(81) start para sa data ng committee
 # ws['A' + str(start_row_committee)].value = "EVALUATION COMMITTEE:"    -> example use
-        
+
 #Committee
 ws['A' + str(start_row_committee)].value = "EVALUATION COMMITTEE:"
 ws['A' + str(start_row_committee)].font = Font(bold=True)
@@ -884,8 +884,8 @@ for i in range(0, len(student_list)):
         honor_stud.append(student_list[i])
     else:
         other_stud.append(student_list[i])
-    
-i = 57  
+
+i = 57
 j = 1
 
 # setting the starting row for table 2
@@ -894,8 +894,8 @@ start_table_2_num_row = table_xy[1] #access index 1 which is the row num
 
 max_row_other_stud =  start_table_2_num_row + len(other_stud) - 1
 
-thin = Side(border_style="thin", color="000000")# border style, color 
-border = Border(left=thin, right=thin, top=thin, bottom=thin)# the position of the border 
+thin = Side(border_style="thin", color="000000")# border style, color
+border = Border(left=thin, right=thin, top=thin, bottom=thin)# the position of the border
 
 rows = ws.iter_cols(min_row=start_table_2_num_row, min_col=1, max_row=max_row_other_stud, max_col=8)
 for row in rows:
@@ -910,10 +910,10 @@ for stud in other_stud:
     # Student items
     stud_id = stud[0]
     stud_name = stud[2] + ' ' + stud[3] + ' ' + stud[1]
-                
+
     # Grade items
     grade_units = grade_list[i][2]
-    grade_id = grade_list[i][5]         
+    grade_id = grade_list[i][5]
     grade_sum = grade_list[i][3]
     grade_gwa = grade_list[i][4]
 
@@ -925,10 +925,10 @@ for stud in other_stud:
             for k in range(1, len(none_list) + 1):
                 char = get_column_letter(k)
                 ws[char + str(start_table_2_num_row)].value = none_list[k - 1]
-            i += 1  
-            start_table_2_num_row += 1 
-            
-        # yellow 
+            i += 1
+            start_table_2_num_row += 1
+
+        # yellow
         else:
             if grade_units != None:
                 for k in range(1, len(none_list) + 1):
@@ -940,14 +940,14 @@ for stud in other_stud:
                         PatternFill(fill_type='solid', fgColor="f0e68c")
                     if k == 7:
                         ws[char + str(start_table_2_num_row)].fill = \
-                        PatternFill(fill_type='solid', fgColor="fbc3cb") 
+                        PatternFill(fill_type='solid', fgColor="fbc3cb")
             else:
                 for k in range(1, len(none_list) + 1):
                     char = get_column_letter(k)
                     ws[char + str(start_table_2_num_row)].value = none_list[k - 1]
-            i += 1  
-            start_table_2_num_row += 1 
-         
+            i += 1
+            start_table_2_num_row += 1
+
     if j == 4:
         for stud in other_stud:
             if stud[2] == 'Jhon Christian':
@@ -959,15 +959,14 @@ for stud in other_stud:
                     char = get_column_letter(k)
                     none_tuple = (str(i + 1), stud_name, '','', grade_units, grade_sum, grade_gwa)
                     none_list = list(none_tuple)
-                    ws[char + str(start_table_2_num_row)].value = none_list[k - 1]  
+                    ws[char + str(start_table_2_num_row)].value = none_list[k - 1]
         i += 1
         start_table_2_num_row += 1
     j += 1
-    
 
 # ----------------------- END OF TABLE 2 -----------------------
 
 wb.save('static/Honors.xlsx')
 # ivee
-#wb.save('D:\\Users\\iveej\\Desktop\\web2py\\applications\\honors\\static'
+# wb.save('D:\\Users\\iveej\\Desktop\\web2py\\applications\\honors\\static'
 #        '\\Honors.xlsx')
